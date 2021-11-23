@@ -1,0 +1,16 @@
+.badge {
+    display: inline-block;
+    font-size: var(--font-size-micro);
+    font-weight: 600;
+    color: var(--background-color-regular);
+    
+    height: 1.3em;
+    line-height: 1.3em;
+    padding: 0 var(--padding-small);
+    border-radius: var(--border-radius-regular);
+}
+
+.badge[data-variant='disabled'] {
+    background: var(--text-color-secondary);
+    opacity: .5;
+}

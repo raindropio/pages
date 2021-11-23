@@ -1,0 +1,16 @@
+.path {
+    width: var(--page-width);
+    margin: 0 auto;
+    margin-bottom: var(--padding-regular);
+}
+
+.back {
+    float: left;
+    margin-left: calc((var(--button-size-small) + var(--padding-large)) * -1);
+}
+
+@media screen and (max-width: 1000px) {
+    .path {
+        margin-top: var(--padding-large);
+    }
+}

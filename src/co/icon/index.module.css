@@ -1,0 +1,112 @@
+.icon {
+    display: inline-block;
+    width: var(--icon-size-regular);
+    height: var(--icon-size-regular);
+	fill: currentColor;
+}
+
+.icon[data-size='small'] {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small);
+}
+
+.icon[data-size='large'] {
+    width: var(--icon-size-large);
+    height: var(--icon-size-large);
+}
+
+.icon[data-size='xlarge'] {
+    width: var(--icon-size-xlarge);
+    height: var(--icon-size-xlarge);
+}
+
+/* avatar */
+.avatar {
+    display: inline-block;
+    position: relative;
+}
+
+.avatar:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    box-shadow: inset 0 0 0 var(--line-size) var(--line-color);
+    content: '';
+    border-radius: 50%;
+}
+
+.avatar > * {
+    display: block;
+    border-radius: 50%;
+}
+
+.activityIndicator {
+    fill: currentColor;
+	position: relative;
+}
+
+.activityIndicator .bg {
+    opacity: 0.35
+}
+
+.activityIndicator .main {
+    animation: rotate .6s ease-in-out infinite;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0)
+	}
+	12.5% {
+		transform: rotate(0)
+	}
+	12.500001% {
+		transform: rotate(45deg)
+	}
+	25% {
+		transform: rotate(45deg)
+	}
+	25.00001% {
+		transform: rotate(90deg)
+	}
+	37.5% {
+		transform: rotate(90deg)
+	}
+	37.500001% {
+		transform: rotate(135deg)
+	}
+	50% {
+		transform: rotate(135deg)
+	}
+	50.00001% {
+		transform: rotate(180deg)
+	}
+	62.5% {
+		transform: rotate(180deg)
+	}
+	62.500001% {
+		transform: rotate(225deg)
+	}
+	75% {
+		transform: rotate(225deg)
+	}
+	75.00001% {
+		transform: rotate(270deg)
+	}
+	87.5% {
+		transform: rotate(270deg)
+	}
+	87.500001% {
+		transform: rotate(315deg)
+	}
+	100% {
+		transform: rotate(315deg)
+	}
+}

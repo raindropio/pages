@@ -1,0 +1,8 @@
+.label {
+    grid-column: 1;
+    text-align: right;
+    font-size: var(--font-size-small);
+    color: var(--text-color-secondary);
+    padding-top: var(--padding-small);
+    padding-left: var(--padding-large);
+}

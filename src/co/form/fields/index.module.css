@@ -1,0 +1,11 @@
+.fields {
+    display: grid;
+    grid-auto-flow: row;
+    grid-gap: var(--padding-regular);
+}
+
+.fields[data-inset='true'] {
+    padding: var(--padding-regular);
+    background-color: var(--background-color-secondary);
+    border-radius: var(--border-radius-regular);
+}

@@ -1,0 +1,22 @@
+.subheader {
+    width: var(--page-width);
+    margin: 0 auto;
+    display: grid;
+    grid-auto-rows: min-content;
+    grid-gap: var(--padding-large);
+    padding-bottom: var(--padding-large);
+}
+
+.subheader:empty {
+    display: none;
+}
+
+.subheader h2 {
+    font-weight: normal;
+    margin: 0;
+    margin-top: calc(var(--padding-regular) * -1);
+    padding: 0;
+    color: var(--text-color-secondary);
+    font-size: var(--font-size-h2);
+    line-height: 145%;
+}

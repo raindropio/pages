@@ -1,0 +1,24 @@
+.toolbar {
+    display: grid;
+    grid-template-areas: 'title buttons';
+    grid-template-columns: 1fr max-content;
+    align-items: center;
+    padding-top: var(--padding-large);
+    padding-bottom: var(--padding-regular);
+    margin: 0;
+    margin-top: var(--padding-regular);
+    box-shadow: 0 calc(var(--line-size) * -1) 0 var(--line-color);
+}
+.toolbar:not(:first-child) {
+    margin-top: var(--padding-large);
+}
+
+.title {
+    grid-area: title;
+    font-size: var(--font-size-h2);
+    font-weight: 600;
+}
+
+.buttons {
+    grid-area: buttons;
+}

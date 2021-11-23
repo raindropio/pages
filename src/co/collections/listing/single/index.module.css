@@ -1,0 +1,42 @@
+a.single {
+    display: inline-grid;
+    grid-gap: var(--padding-regular);
+    align-content: flex-start;
+
+    color: var(--text-color-regular);
+    padding: var(--padding-large);
+}
+
+.folder {
+    border-radius: var(--border-radius-regular);
+    position: relative;
+
+    background: var(--background-color-secondary);
+    transition: background .1s linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 5 / 3;
+}
+
+@supports not (aspect-ratio: 1/1) {
+    .folder {
+        height: 180px;
+    }
+}
+
+.folder[data-custom-bg='true'] {
+    background: rgba(var(--bg-rgb), .08);
+}
+
+.single:hover .folder[data-custom-bg='true'] {
+    background: rgba(var(--bg-rgb), .15);
+}
+
+.cover {
+    display: block;
+}
+
+.title {
+    font-weight: 600;
+}

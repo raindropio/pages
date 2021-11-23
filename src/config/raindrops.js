@@ -1,0 +1,1 @@
+export const RAINDROPS_PER_PAGE = 30

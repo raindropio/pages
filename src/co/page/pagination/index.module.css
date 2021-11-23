@@ -1,0 +1,51 @@
+.pagination {
+    z-index: 99;
+    bottom: 0;
+    
+    background: var(--background-color-regular);
+    box-shadow: 0 1px 0 var(--background-color-regular), inset 0 var(--line-size) 0 rgba(0,0,0,.13);
+}
+.pagination[data-sticky='true'] {
+    position: sticky;
+}
+
+@supports (backdrop-filter: none) {
+	.pagination {
+        background: radial-gradient(circle, hsla(var(--background-hsl-regular), .8) 90%, var(--background-color-regular) 100%);
+        backdrop-filter: blur(20px);
+	}
+}
+
+.inner {
+    width: var(--page-width);
+    margin: 0 auto;
+    padding: var(--padding-large) 0;
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-gap: var(--padding-large);
+}
+
+.pages {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: var(--button-size-regular);
+    grid-template-rows: 1fr;
+    grid-gap: var(--padding-large);
+    justify-content: flex-start;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    mask-image: linear-gradient(to right, white calc(100% - var(--button-size-regular)), transparent)
+}
+
+.page, .pages .space {
+    width: var(--button-size-regular);
+    justify-content: center;
+    text-align: center;
+}
+
+.navigation {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: var(--padding-large);
+}

@@ -3,7 +3,7 @@ import React from 'react'
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr'
 import Helmet from 'react-helmet'
 
-import App from '../pages/_app'
+import App from '~pages/_app'
 
 export const passToClient = ['pageProps']
 
@@ -22,6 +22,7 @@ export function render({ Page, pageProps={}, statusCode, redirect, json }) {
 		documentHtml = escapeInject`<!DOCTYPE html>
 			<html ${dangerouslySkipEscape(helmet.htmlAttributes.toString())}>
 				<head>
+					<meta charSet="utf-8" />
 					${dangerouslySkipEscape(
 						helmet.title.toString() +
 						helmet.meta.toString() +

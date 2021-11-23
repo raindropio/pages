@@ -1,0 +1,54 @@
+.cover {
+    position: relative;
+    max-width: 100%;
+    align-self: flex-start;
+    color: transparent;
+}
+
+.cover img {
+    object-fit: cover;
+    border-radius: var(--border-radius-regular);
+    overflow: hidden; /* useful when alt text is very long */
+}
+
+.cover img:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background-color-secondary);
+}
+
+.cover img:-moz-broken, .cover img:-moz-loading, .cover img:-moz-suppressed {
+    background: var(--background-color-secondary)
+}
+
+.cover:not(.simple):after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    border-radius: var(--border-radius-regular);
+    box-shadow: inset 0 0 0 var(--line-size) var(--line-color);
+}
+
+.simple {
+    width: var(--icon-size-regular) !important;
+    height: var(--icon-size-regular) !important;
+}
+
+.grid, .masonry {
+    width: 100% !important
+}
+
+@media screen and (max-width: 1000px) {
+    .list {
+        width: 68px !important;
+        height: 51px !important;
+    }
+}

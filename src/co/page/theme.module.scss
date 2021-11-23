@@ -1,0 +1,120 @@
+.theme {
+    /* paddings */
+    --padding-large: 18px;
+    --padding-regular: 10px;
+    --padding-small: 3px;
+
+    /* fonts */
+    --font-size-h1: 28px;
+    --font-size-h2: 20px;
+    --font-size-regular: 17px;
+    --font-size-small: 15px;
+    --font-size-micro: 13px;
+
+    /* icons */
+    --icon-size-xlarge: 64px;
+    --icon-size-large: 32px;
+    --icon-size-regular: 24px;
+    --icon-size-small: 18px;
+
+    /* buttons */
+    --button-size-large: 48px;
+    --button-size-regular: 32px;
+    --button-size-small: 24px;
+    
+    /* etc */
+    --border-radius-regular: 4px;
+    --border-radius-large: 48px;
+    --line-size: 1px;
+}
+
+/* Light theme */
+@mixin light() {
+    /* colors */
+    --background-hsl-regular: 0,0%,100%;
+    --background-color-regular: hsl(var(--background-hsl-regular));
+    --background-color-secondary: #F3F5F6;
+    --background-color-disabled: rgba(0,0,0,.07);
+
+    --accent-color: #3169FF;
+    --text-color-regular: #1E1E1E;
+    --text-color-secondary: #70767A;
+    --text-color-disabled: rgba(0,0,0,.2);
+    --line-color: rgba(0,0,0,.15);
+}
+
+.theme[data-theme='light'] {
+    @include light();
+}
+
+@media (prefers-color-scheme: light) {
+    .theme[data-theme='auto'] {
+        @include light();
+    }
+}
+
+/* Dark theme */
+@mixin dark() {
+    /* colors */
+    --background-hsl-regular: 0,0%,19%;
+    --background-color-regular: hsl(var(--background-hsl-regular));
+    --background-color-secondary: #222222;
+    --background-color-disabled: rgba(255,255,255,.15);
+
+    --accent-color: #3169FF;
+    --text-color-regular: #E0E0E0;
+    --text-color-secondary: #8A8F94;
+    --text-color-disabled: rgba(0,0,0,.2);
+    --line-color: rgba(255,255,255,.18);
+}
+
+.theme[data-theme='dark'] {
+    @include dark();
+}
+
+@media (prefers-color-scheme: dark) {
+    .theme[data-theme='auto'] {
+        @include dark();
+    }
+}
+
+/* Small screen */
+@media screen 
+and (max-width: 1000px)
+and (min-device-width: 1000px) {
+    .theme {
+        /* paddings */
+        --padding-large: 16px;
+        --padding-regular: 8px;
+        --padding-small: 4px;
+
+        /* fonts */
+        --font-size-h1: 20px;
+        --font-size-h2: 17px;
+        --font-size-regular: 15px;
+        --font-size-small: 14px;
+        --font-size-micro: 12px;
+
+        /* icons */
+        --icon-size-xlarge: 48px;
+        --icon-size-large: 24px;
+        --icon-size-regular: 18px;
+        --icon-size-small: 14px;
+
+        /* buttons */
+        --button-size-large: 32px;
+        --button-size-regular: 24px;
+        --button-size-small: 18px;
+
+        /* etc */
+        --border-radius-regular: 3px;
+    }
+}
+
+@media 
+(-webkit-min-device-pixel-ratio: 2), 
+(min-resolution: 192dpi) {
+    .theme {
+        --line-size: .5px;
+    }
+}

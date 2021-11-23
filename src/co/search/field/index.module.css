@@ -1,0 +1,29 @@
+.form {
+    flex: 1;
+    margin: var(--padding-small) 0;
+    background: var(--background-color-secondary);
+    border-radius: var(--border-radius-large);
+    display: grid;
+    grid-template-columns: min-content 1fr min-content;
+    padding: 0 var(--padding-regular);
+    grid-gap: var(--padding-regular);
+    align-items: center;
+    transition: box-shadow .2s ease-in-out, background .2s ease-in-out;
+}
+.form:focus-within {
+    box-shadow: 0 0 0 1px var(--accent-color), inset 0 0 0 1px var(--accent-color);
+    background: var(--background-color-regular);
+}
+
+.field {
+    font-size: var(--font-size-h2);
+    background: transparent;
+    appearance: none;
+    border: 0;
+    padding: var(--padding-regular) 0;
+    outline: none;
+}
+
+.magnifier {
+    color: var(--text-color-secondary);
+}

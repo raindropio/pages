@@ -1,0 +1,12 @@
+.listing {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+    grid-template-rows: 1fr;
+    margin: 0 calc(var(--padding-large) * -1);
+}
+
+@media screen and (max-width: 500px) {
+    .listing {
+        grid-template-columns: 50vw 50vw;
+    }
+}

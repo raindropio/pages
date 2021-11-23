@@ -1,0 +1,30 @@
+.listing {
+    margin: 0 calc(var(--padding-large) * -1);
+    --grid-item-width: 350px;
+}
+
+.grid .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(50%, var(--grid-item-width)), 1fr));
+    grid-template-rows: 1fr;
+}
+
+.grid, .masonry {
+    overflow: hidden;
+}
+
+.grid .items, .masonry .items {
+    margin-right: -1px;
+    margin-bottom: -1px;
+}
+
+.masonry .items {
+    columns: var(--grid-item-width);
+    column-gap: 0;
+}
+
+@media screen and (max-width: 1000px) {
+    .listing {
+        --grid-item-width: 200px;
+    }
+}

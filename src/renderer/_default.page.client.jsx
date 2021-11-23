@@ -1,7 +1,8 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 import { getPage } from 'vite-plugin-ssr/client'
-import App from '../pages/_app'
+
+import App from '~pages/_app'
 
 hydrate()
 

@@ -1,0 +1,4 @@
+.fallback {
+    color: var(--text-color-secondary);
+    text-decoration: none;
+}

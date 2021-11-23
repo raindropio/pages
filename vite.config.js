@@ -1,6 +1,7 @@
 import path from 'path'
 import react from '@vitejs/plugin-react'
 import ssr from 'vite-plugin-ssr/plugin'
+import svgrPlugin from 'vite-plugin-svgr'
 
 const src = path.resolve(__dirname, 'src')
 
@@ -15,5 +16,5 @@ export default {
 			replacement: `${src}/$1`
 		}]
 	},
-	plugins: [react(), ssr()]
+	plugins: [react(), ssr(), svgrPlugin()]
 }

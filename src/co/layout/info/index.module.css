@@ -1,0 +1,26 @@
+.info {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    grid-gap: var(--padding-regular);
+
+    font-size: var(--font-size-small);
+    color: var(--text-color-secondary);
+}
+
+.info > * {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.divider:first-child,
+.info > *:empty,
+.info > *:empty + .divider {
+    display: none;
+}
+
+.divider {
+    opacity: .5;
+}

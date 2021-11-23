@@ -1,0 +1,24 @@
+.select {
+    position: relative;
+    overflow: initial; /* fix firefox bug */
+    border-radius: var(--border-radius-regular);
+}
+.select:focus-within {
+    outline-style: auto;
+}
+
+.select select {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    appearance: none;
+}
+
+.dropDownIcon {
+    color: var(--text-color-secondary);
+}
