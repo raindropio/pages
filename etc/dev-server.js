@@ -26,7 +26,7 @@ async function startServer() {
 
 	const renderPage = createPageRenderer({ viteDevServer, isProduction, root })
 	app.get('*', async (req, res, next) => {
-		const { httpResponse, statusCode, redirect, json } = await renderPage({
+		const { httpResponse, statusCode, headers={}, redirect, json } = await renderPage({
 			url: req.originalUrl
 		})
 
@@ -35,6 +35,7 @@ async function startServer() {
 		} else if (json) {
 			return res
 				.status(statusCode || 200)
+				.set(headers)
 				.json(json)
 		} else if (!httpResponse)
 			return next()
@@ -42,6 +43,7 @@ async function startServer() {
 		res
 			.status(statusCode || httpResponse.statusCode)
 			.type(httpResponse.contentType)
+			.set(headers)
 			.send(httpResponse.body)
 	})
 

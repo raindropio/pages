@@ -5,13 +5,14 @@ import '../dist/server/importBuild.js'
 const renderPage = createPageRenderer({ isProduction: true })
 
 export async function handleSsr(url) {
-	const { httpResponse, statusCode, redirect, json } = await renderPage({ url })
+	const { httpResponse, statusCode, headers={}, redirect, json } = await renderPage({ url })
 
 	if (redirect) {
 		return Response.redirect(redirect, statusCode||302)
 	} else if (json) {
 		return new Response(JSON.stringify(json), {
-			status: statusCode || 200
+			status: statusCode || 200,
+			headers
 		})
 	} else if (!httpResponse)
 		return null
@@ -19,7 +20,8 @@ export async function handleSsr(url) {
 		return new Response(
 			httpResponse.body, {
 				headers: {
-					'content-type': httpResponse.contentType
+					'content-type': httpResponse.contentType,
+					...headers
 				},
 				status: statusCode || httpResponse.statusCode,
 			}

@@ -15,3 +15,5 @@ But optimized for Cloudflare Worker for now.
 
 ## Todo
 [] Client-side routing with prefetch https://vite-plugin-ssr.com/useClientRouter
+
+[] /user_name/collection-11/view/... redirect
