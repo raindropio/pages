@@ -1,6 +1,9 @@
 export default {
     site: {
-        index: process.env.NODE_ENV == 'production' ? 'https://raindrop.io' : 'http://dev.raindrop.io'
+        index: import.meta.env.PROD ? 'https://raindrop.io' : 'http://dev.raindrop.io'
+    },
+    pub: {
+        index: typeof SITE_URL == 'string' ? SITE_URL : ''
     },
     app: {
         index: 'https://app.raindrop.io'

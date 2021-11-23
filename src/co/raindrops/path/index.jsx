@@ -11,7 +11,7 @@ export default function RaindropsPath({ collections, collection, user, self }) {
             key='user'
             href={`/${user.name}`}
             bold
-            prefetch={false}>
+            data-prefetch={false}>
             {!!user.avatar && <Avatar src={user.avatar} alt={user.name} />}
             
             {user.name}
@@ -25,7 +25,7 @@ export default function RaindropsPath({ collections, collection, user, self }) {
             <Page.Path.Part
                 key={_id}
                 href={`/${user.name}/${slug}-${_id}`}
-                prefetch={false}>
+                data-prefetch={false}>
                 {title}
             </Page.Path.Part>
         ))

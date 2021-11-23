@@ -1,11 +1,8 @@
-import { useMemo, useCallback } from 'react'
-import { useRouter } from 'next/router'
+import { useMemo } from 'react'
 import { Select } from '~co/button'
 import Icon from '~co/icon'
 
-export default function RaindropsSort({ options={} }) {
-    const router = useRouter()
-
+export default function RaindropsSort({ onChange, options={} }) {
     const sort = options.sort
     const sorts = useMemo(()=>[
         { separator: true, label: 'Curator specified' },
@@ -24,19 +21,6 @@ export default function RaindropsSort({ options={} }) {
             { value: 'score', label: 'By relevance', dir: 'desc' }
         ] : []
     ], [options])
-
-    const onChange = useCallback(value=>{
-        router.push({
-            pathname: router.pathname.endsWith('[options]') ? router.pathname : `${router.pathname}/[options]`,
-            query: {
-                ...router.query,
-                options: new URLSearchParams({
-                    ...options,
-                    sort: value
-                }).toString()
-            }
-        })
-    }, [options])
 
     return (
         <Select 

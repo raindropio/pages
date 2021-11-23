@@ -15,7 +15,7 @@ export default function CollectionsSingle({ item, user, target }) {
     return (
         <a 
             href={`/${user.name}/${item.slug}-${item._id}`}
-            //prefetch={false}
+            data-prefetch={false}
             target={target}
             className={s.single}>
             <span 

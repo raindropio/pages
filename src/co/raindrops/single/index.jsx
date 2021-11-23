@@ -1,5 +1,4 @@
 import s from './index.module.css'
-import { useRouter } from 'next/router'
 import { Buttons } from '~co/button'
 import { ShortDate } from '~modules/format/date'
 
@@ -14,7 +13,6 @@ import Add from './add'
 
 export default function RaindropsSingle(props) {
     const { item, collection, target, options={} } = props
-    const { query } = useRouter()
 
     return (
         <article
@@ -42,7 +40,7 @@ export default function RaindropsSingle(props) {
                     <Buttons tight className={s.filters}>
                         <Important {...props} />
 
-                        {!!(query.id && item.collection?.$id != query.id) && (
+                        {!!(collection.id && item.collection?.$id != collection.id) && (
                             <Path {...props} />
                         )}
 

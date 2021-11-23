@@ -7,7 +7,7 @@
 	"scripts": {
 		"local": "node ./etc/dev-server",
 		"preview": "yarn build:vite && sudo wrangler dev --port 80",
-		"deploy:prod": "yarn build:vite && wrangler publish",
+		"deploy:prod": "yarn build:vite && wrangler publish --env production",
 		"build": "yarn build:vite && yarn build:worker",
 		"build:vite": "vite build && vite build --ssr",
 		"build:worker": "wrangler build"

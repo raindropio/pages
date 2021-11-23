@@ -1,14 +1,10 @@
 import s from './index.module.css'
-import { useEffect, useRef, useCallback, useState } from 'react'
-// import { useRouter } from 'next/router'
+import { useEffect, useRef } from 'react'
 
 import Button from '~co/button'
 import Icon from '~co/icon'
 
-export default function Pagination({ count, perpage, force=false, ...etc }) {
-    return null
-    const router = useRouter()
-
+export default function Pagination({ count, perpage, force=false, getHref, ...etc }) {
     const _pagesRef = useRef(null)
     const page = parseInt(etc.page)||0
     const pagesCount = Math.ceil(count/perpage)
@@ -19,19 +15,6 @@ export default function Pagination({ count, perpage, force=false, ...etc }) {
             _pagesRef.current.scrollLeft = elem.offsetLeft - (_pagesRef.current.clientWidth / 2)
         }
     }, [page])
-
-    const getHref = useCallback((page)=>{
-        const options = new URLSearchParams(router.query.options)
-        options.set('page', page)
-    
-        return {
-            pathname: router.pathname.endsWith('[options]') ? router.pathname : `${router.pathname}/[options]`,
-            query: {
-                ...router.query,
-                options: options.toString()
-            }
-        }
-    }, [router])
 
     if (!force && pagesCount<=1)
         return null
@@ -47,10 +30,10 @@ export default function Pagination({ count, perpage, force=false, ...etc }) {
                 <Button
                     key={i}
                     id={`page-${i}`}
-                    href={getHref(i)}
+                    href={page != i ? getHref(i) : ''}
                     className={s.page}
                     variant={page == i ? 'active' : 'flat'}
-                    prefetch={false}>
+                    data-prefetch={false}>
                     {i+1}
                 </Button>
             )
@@ -74,7 +57,7 @@ export default function Pagination({ count, perpage, force=false, ...etc }) {
                         href={getHref(page-1)}
                         disabled={!page}
                         title='Previous page'
-                        prefetch={false}>
+                        data-prefetch={false}>
                         <Icon name='arrow-left' />
                     </Button>
 

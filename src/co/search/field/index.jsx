@@ -1,10 +1,11 @@
 import s from './index.module.css'
 import { useEffect, useState, useCallback, useRef } from 'react'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import Icon, { ActivityIndicator } from '~co/icon'
 import Button from '~co/button'
 
 export default function SearchField({ option='search', placeholder='Search' }) {
+    return null
     const router = useRouter()
     const input = useRef(null)
     const [value, setValue] = useState('')

@@ -1,10 +1,14 @@
 name = "pages"
 type = "webpack"
 account_id = "6f3fae9cff251a89f334f9debec204f1"
-workers_dev = true
 webpack_config = "./worker/webpack.config.js"
 compatibility_date = "2021-09-29"
 
 [site]
 bucket = "./dist/client"
 entry-point = "./worker"
+
+[env.production]
+name = "pages-prod"
+routes = ["pub.raindrop.io/*"]
+vars = { SITE_URL = "https://pub.raindrop.io" }

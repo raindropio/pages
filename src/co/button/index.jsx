@@ -5,7 +5,7 @@ import Icon, { Logo, Avatar } from '~co/icon'
 export * from './select'
 export * from './share'
 
-export function Base({ as='a', className='', prefetch, variant, color, size, bold=false, disabled=false, inline=true, forwardedRef, ...props }) {
+export function Base({ as='a', className='', variant, color, size, bold=false, disabled=false, inline=true, forwardedRef, ...props }) {
     const Component = as
 
     return (

@@ -14,6 +14,6 @@ export default function RaindropsSinglePath({ target, item, user, collections })
             user={user}
             target={target}
             className={s.path}
-            prefetch={false} />
+            data-prefetch={false} />
     )
 }

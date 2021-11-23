@@ -50,7 +50,7 @@ export default async function getJSON(url) {
         author_url: `${links.site.index}/${user_name}`,
         thumbnail_url: collection.cover?.length ? 
             collection.cover[0] : 
-            `${process.env.SITE_URL}/icon_128.png`,
+            `${links.pub.index}/icon_128.png`,
         thumbnail_width: 128,
         thumbnail_height: 128,
         cache_age: 3600,
