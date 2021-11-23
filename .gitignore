@@ -1,6 +1,7 @@
 # node
 node_modules
+package-lock.json
 
 # outputs
-/public
-/functions
+/worker/worker/
+/dist/
