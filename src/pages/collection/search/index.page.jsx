@@ -103,7 +103,7 @@ export default function SearchScreen({ statusCode, collection, collections, rain
                             variant='flat' 
                             href={`${collectionUrl}/share/`+new URLSearchParams(options)}
                             title='Export & Share'
-                            prefetch={false}>
+                            data-prefetch={false}>
                             <Icon name='upload-2' />
                         </Button>
                     </Page.Header.Buttons>

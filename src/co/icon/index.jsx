@@ -1,8 +1,7 @@
 import s from './index.module.css'
 import { ReactComponent as BrandIcon } from '~assets/brand/icon_48.svg'
 import { THUMBNAILS_ENDPOINT } from '~config/api'
-
-//const remixicon = import.meta.globEager('../../assets/remixicon/*.svg')
+import remixIconSymbolUrl from '~assets/remixicon.symbol.svg?url'
 
 function Base({ as='svg', size, className='', ...etc }) {
     const Component = as
@@ -16,10 +15,10 @@ function Base({ as='svg', size, className='', ...etc }) {
 }
 
 export default function Icon({ name, variant='line', ...etc }) {
-    var Component = undefined//remixicon[`../../assets/remixicon/${name}${variant ? '-'+variant : ''}.svg`].ReactComponent
-
     return (
-        <Base {...etc} as={Component} />
+        <Base {...etc} as='svg'>
+            <use xlinkHref={`${remixIconSymbolUrl}#ri-${name}${variant ? '-'+variant : ''}`}></use>
+        </Base>
     )
 }
 
