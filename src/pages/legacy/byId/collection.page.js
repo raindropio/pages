@@ -1,4 +1,5 @@
 import Api from '~api'
+import links from '~config/links'
 
 let cache = { }
 
@@ -51,7 +52,7 @@ export async function onBeforeRender({ routeParams: { id }, url }) {
 
     return {
         pageContext: {
-            redirect: destination
+            redirect: `${links.site.index}${destination}`
         }
     }
 }

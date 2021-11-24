@@ -9,7 +9,7 @@ async function getUrl(id) {
     const user = await Api.user.getById(id)
     if (!user) return cache[id]=null
 
-    return cache[id]=`${links.site.index}/${user.name}`
+    return cache[id]=`/${user.name}`
 }
 
 export async function onBeforeRender({ routeParams: { id } }) {
@@ -29,9 +29,9 @@ export async function onBeforeRender({ routeParams: { id } }) {
         }
 
     return {
-        pageContext: { 
+        pageContext: {
             statusCode: 308,
-            redirect: url
+            redirect: `${links.site.index}${url}`
         }
     }
 }
