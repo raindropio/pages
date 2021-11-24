@@ -20,7 +20,10 @@ export async function onBeforeRender({ routeParams: { user_name } }) {
 	if (!user || !collections?.length)
 		return {
             pageContext: { 
-                statusCode: 404
+                statusCode: 404,
+                headers: {
+                    'Cache-Control': 'public,max-age=10'
+                }
             }
         }
 
@@ -29,6 +32,9 @@ export async function onBeforeRender({ routeParams: { user_name } }) {
             pageProps: {
                 user,
                 collections
+            },
+            headers: {
+                'Cache-Control': 'public,max-age=3'
             }
 		}
 	}

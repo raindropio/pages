@@ -30,6 +30,12 @@ async function startServer() {
 			url: req.originalUrl
 		})
 
+		//remove caching headers for dev
+		if (!isProduction)
+			for(const i of Object.keys(headers))
+				if (i.toLowerCase() == 'cache-control')
+					delete headers[i]
+
 		if (redirect) {
 			return res.redirect(statusCode||302, redirect)
 		} else if (json) {
