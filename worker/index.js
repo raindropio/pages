@@ -16,7 +16,9 @@ addEventListener('fetch', (event) => {
 
 async function handleFetchEvent(event) {
 	if (!isAssetUrl(event.request.url)) {
-		const response = await handleSsr(event.request.url)
+		const response = await handleSsr(
+			new URL(event.request.url).toString() //be sure to wrap it in URL(), otherwise some urls fail
+		)
 		if (response !== null) return response
 	}
 	
