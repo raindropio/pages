@@ -46,7 +46,7 @@ export default async function getJSON(url) {
         title: user.name+' bookmarks',
         thumbnail_url: user.avatar ? 
             user.avatar : 
-            `${links.pub.index}/icon_128.png`,
+            `${import.meta.env.BASE_URL}icon_128.png`,
         thumbnail_width: 128,
         thumbnail_height: 128,
         cache_age: 3600,

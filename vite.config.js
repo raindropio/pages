@@ -7,6 +7,7 @@ const src = path.resolve(__dirname, 'src')
 
 export default {
 	root: src,
+	base: process.env.BASE_URL || '/',
 	build: {
 		outDir: '../dist'
 	},
