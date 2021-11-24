@@ -1,0 +1,1 @@
+export default '/:user_name/share/me/:options'

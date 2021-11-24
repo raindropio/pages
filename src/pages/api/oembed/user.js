@@ -28,8 +28,7 @@ export function getHTML({ user }, options={}) {
         style="border: 0; width: 100%; height: ${height || base.height}px;"
         allowfullscreen
         frameborder="0"
-        src="${url}"
-        allowfullscreen></iframe>`)
+        src="${url}"></iframe>`)
         .replace(/\s+/g, ' ')
 }
 
