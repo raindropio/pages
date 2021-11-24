@@ -1,28 +1,9 @@
-// import { useRouter } from 'next/router'
-import { parseQueryParams } from '~modules/format/url'
+import { useLinkFactory } from '~modules/router'
 
 export function useFilterHref(filter) {
-    return {}
-    const { query, pathname } = useRouter()
-    const search = String(parseQueryParams(query.options).search||'')
+    const getLink = useLinkFactory()
 
-    let val = filter.includes(' ') ? `"${filter}"` : filter
-
-    if (search.includes(val))
-        return {
-            pathname,
-            query
-        }
-
-    return {
-        pathname: '/[user_name]/search/[id]/[options]',
-        query: {
-            ...query,
-            options: new URLSearchParams({
-                search: (search ? 
-                    `${search.trim()} ${val}` :
-                    val) + ' '
-            }).toString()
-        }
-    }
+    return getLink({
+        search: filter.includes(' ') ? `"${filter}"` : filter
+    })
 }

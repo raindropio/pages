@@ -1,52 +1,31 @@
 import s from './index.module.css'
 import { useEffect, useState, useCallback, useRef } from 'react'
-// import { useRouter } from 'next/router'
+import { navigate } from 'vite-plugin-ssr/client/router'
+
+import { useLinkFactory } from '~modules/router'
 import Icon, { ActivityIndicator } from '~co/icon'
 import Button from '~co/button'
 
-export default function SearchField({ option='search', placeholder='Search' }) {
-    return null
-    const router = useRouter()
+export default function SearchField({ value='', placeholder='Search' }) {
+    const getLink = useLinkFactory()
+
     const input = useRef(null)
-    const [value, setValue] = useState('')
+    const [search, setSearch] = useState(()=>value)
     const [loading, setLoading] = useState(false)
 
     //on search change
     useEffect(()=>{
-        setValue(
-            new URLSearchParams(router.query.options).get(option) || ''
-        )
+        setSearch(value)
 
         if (input.current)
             input.current.focus()
-    }, [router.query.options])
-
-    //on loading screen
-    useEffect(() => {
-        const routeChangeStart = () => setLoading(true)
-        const routeChangeComplete = () => setLoading(false)
-    
-        router.events.on('routeChangeStart', routeChangeStart)
-        router.events.on('routeChangeComplete', routeChangeComplete)
-    
-        return () => {
-            router.events.off('routeChangeStart', routeChangeStart)
-            router.events.off('routeChangeComplete', routeChangeComplete)
-        }
-    }, [setLoading])
+    }, [value])
 
     //on submit
-    const onSubmit = useCallback(e=>{
+    const onFormSubmit = useCallback(e=>{
         e.preventDefault()
-
-        router.push({
-            pathname: router.pathname.endsWith('[options]') ? router.pathname : `${router.pathname}/[options]`,
-            query: {
-                ...router.query,
-                options: new URLSearchParams({ [option]: value }).toString()
-            }
-        })
-    }, [value])
+        navigate(getLink({ search }))
+    }, [search])
 
     const onFormClick = useCallback(e=>{
         input.current.focus()
@@ -54,13 +33,12 @@ export default function SearchField({ option='search', placeholder='Search' }) {
 
     const onResetClick = useCallback(e=>{
         e.preventDefault()
-        setValue('')
-        onSubmit(e)
-    }, [setValue])
+        navigate(getLink({ search: '' }))
+    }, [])
     
     return (
         <form 
-            onSubmit={onSubmit}
+            onSubmit={onFormSubmit}
             className={s.form}
             onClick={onFormClick}>
             {loading ? (
@@ -77,12 +55,12 @@ export default function SearchField({ option='search', placeholder='Search' }) {
                 ref={input}
                 className={s.field}
                 type='text'
-                value={value}
+                value={search}
                 placeholder={placeholder}
                 autoFocus
-                onChange={e=>setValue(e.target.value)} />
+                onChange={e=>setSearch(e.target.value)} />
 
-            {!!value && (
+            {!!search && (
                 <Button 
                     className={s.reset}
                     variant='flat'

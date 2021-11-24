@@ -1,10 +1,13 @@
 import s from './index.module.css'
 import { useEffect, useRef } from 'react'
 
+import { useLinkFactory } from '~modules/router'
 import Button from '~co/button'
 import Icon from '~co/icon'
 
-export default function Pagination({ count, perpage, force=false, getHref, ...etc }) {
+export default function Pagination({ count, perpage, force=false, ...etc }) {
+    const getLink = useLinkFactory()
+
     const _pagesRef = useRef(null)
     const page = parseInt(etc.page)||0
     const pagesCount = Math.ceil(count/perpage)
@@ -30,7 +33,7 @@ export default function Pagination({ count, perpage, force=false, getHref, ...et
                 <Button
                     key={i}
                     id={`page-${i}`}
-                    href={page != i ? getHref(i) : ''}
+                    href={page != i ? getLink({page: i}) : ''}
                     className={s.page}
                     variant={page == i ? 'active' : 'flat'}
                     data-prefetch={false}>
@@ -54,7 +57,7 @@ export default function Pagination({ count, perpage, force=false, getHref, ...et
 
                 <nav className={s.navigation}>
                     <Button 
-                        href={getHref(page-1)}
+                        href={getLink({page: page-1})}
                         disabled={!page}
                         title='Previous page'
                         data-prefetch={false}>
@@ -62,7 +65,7 @@ export default function Pagination({ count, perpage, force=false, getHref, ...et
                     </Button>
 
                     <Button 
-                        href={getHref(page+1)}
+                        href={getLink({page: page+1})}
                         disabled={page >= pagesCount-1 && force != 'next'}
                         title='Next page'>
                         <Icon name='arrow-right' />

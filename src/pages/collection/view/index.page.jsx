@@ -1,5 +1,4 @@
 import Helmet from 'react-helmet'
-import { navigate } from 'vite-plugin-ssr/client/router'
 import Api from '~api'
 import { RAINDROPS_PER_PAGE } from '~config/raindrops'
 import { parseQueryParams } from '~modules/format/url'
@@ -7,6 +6,7 @@ import links from '~config/links'
 import find from 'lodash-es/find'
 
 import Page from '~co/page'
+import { LinkFactory } from '~modules/router'
 import Button from '~co/button'
 import Icon, { Logo } from '~co/icon'
 import CollectionCover from '~co/collections/cover'
@@ -65,138 +65,139 @@ export default function Collection({ statusCode, collection, collections, raindr
 	const childrens = useChildrens(collections, collection)
 
 	return (
-        <Page.Wrap 
-            wide={collection.view == 'grid' || collection.view == 'masonry'}
-            theme={options.theme}
-            accentColor={collection.color}>
-            <Helmet>
-                <link 
-                    rel='alternate'
-                    type='application/json+oembed'
-                    href={`${links.pub.index}/api/oembed?url=${encodeURIComponent(fullUrl)}`}
-                    title={collection.title} />
-                <link 
-                    rel='alternate'
-                    type='application/rss+xml'
-                    href={`https://raindrop.io/collection/${collection._id}/feed`}
-                    title={collection.title} />
+        <LinkFactory.Provider value={next=>{
+            const params = new URLSearchParams(options)
+            params.set('page', 0)
 
-                <link rel='canonical' href={fullUrl} />
-                <meta name='twitter:url' content={fullUrl} />
-                <meta name='og:url' content={fullUrl} />
+            if (Object.keys(next))
+                for(const [key, val] of Object.entries(next))
+                    params.set(key, val)
 
-                <title>{collection.title}</title>
-                <meta name='twitter:title' content={collection.title} />
-                <meta name='og:title' content={collection.title} />
+            return `${baseUrl}${params.get('search')?'/search':''}/${params.toString()}`
+        }}>
+            <Page.Wrap 
+                wide={collection.view == 'grid' || collection.view == 'masonry'}
+                theme={options.theme}
+                accentColor={collection.color}>
+                <Helmet>
+                    <link 
+                        rel='alternate'
+                        type='application/json+oembed'
+                        href={`${links.pub.index}/api/oembed?url=${encodeURIComponent(fullUrl)}`}
+                        title={collection.title} />
+                    <link 
+                        rel='alternate'
+                        type='application/rss+xml'
+                        href={`https://raindrop.io/collection/${collection._id}/feed`}
+                        title={collection.title} />
 
-                <meta name='og:type' content='website' />
-                <meta name='twitter:card' content='summary_large_image' />					
+                    <link rel='canonical' href={fullUrl} />
+                    <meta name='twitter:url' content={fullUrl} />
+                    <meta name='og:url' content={fullUrl} />
 
-                <meta name='description' content={description} />
-                <meta name='twitter:description' content={description} />
-                <meta name='og:description' content={description} />
+                    <title>{collection.title}</title>
+                    <meta name='twitter:title' content={collection.title} />
+                    <meta name='og:title' content={collection.title} />
 
-                <meta name='twitter:label1' content='Created by' />
-                <meta name='twitter:data1' content={user.name} />
+                    <meta name='og:type' content='website' />
+                    <meta name='twitter:card' content='summary_large_image' />					
 
-                {!!collection.cover?.length && [
-                    <link key='icon' rel='icon' type='image/png' href={collection.cover[0]} />,
-                    <meta key='ti' name='twitter:image' content={collection.cover[0]} />,
-                    <meta key='oi' name='og:image' content={collection.cover[0]} />
-                ]}
-            </Helmet>
+                    <meta name='description' content={description} />
+                    <meta name='twitter:description' content={description} />
+                    <meta name='og:description' content={description} />
 
-            <Path 
-                collection={collection}
-                collections={collections}
-                user={user} />
+                    <meta name='twitter:label1' content='Created by' />
+                    <meta name='twitter:data1' content={user.name} />
 
-            <Page.Header.Wrap>
-                <Page.Header.Icon>
-                    <CollectionCover 
-                        {...collection}
-                        size='large'
-                        fallback={false} />
-                </Page.Header.Icon>
-                
-                <Page.Header.Title>{collection.title}</Page.Header.Title>
+                    {!!collection.cover?.length && [
+                        <link key='icon' rel='icon' type='image/png' href={collection.cover[0]} />,
+                        <meta key='ti' name='twitter:image' content={collection.cover[0]} />,
+                        <meta key='oi' name='og:image' content={collection.cover[0]} />
+                    ]}
+                </Helmet>
 
-                <Page.Header.Buttons>
-                    <Button 
-                        variant='flat'
-                        href={`/${user.name}/${collection.slug}-${collection._id}/share`}
-                        bold>
-                        <Icon name='upload-2' />
-                    </Button>
-
-                    <Button 
-                        variant='flat' 
-                        href={`/${user.name}/${collection.slug}-${collection._id}/search`}
-                        data-prefetch={false}
-                        title='Search'>
-                        <Icon name='search' />
-                    </Button>
-                    
-                    <Button 
-                        variant='flat' 
-                        href={links.site.index}
-                        title='Raindrop.io'>
-                        <Logo />
-                    </Button>
-                </Page.Header.Buttons>
-            </Page.Header.Wrap>
-
-            <Page.Subheader>
-                {!!collection.description && (
-                    <h2>
-                        {collection.description}
-                    </h2>
-                )}
-
-                {!parseInt(options.page) && (
-                    <Collections
-                        items={childrens}
-                        user={user} />
-                )}
-            </Page.Subheader>
-
-            <Page.Content>
-                <Toolbar.Wrap>
-                    <Toolbar.Title>
-                        {options.search ? options.search : raindrops.count+' bookmarks'}
-                    </Toolbar.Title>
-
-                    {!!raindrops.items.length && (
-                        <Toolbar.Buttons>
-                            <Sort
-                                options={options}
-                                onChange={sort=>{
-                                    const params = new URLSearchParams(options)
-                                    params.set('sort', sort)
-                                    navigate(`${baseUrl}/${params.toString()}`)
-                                }} />
-                        </Toolbar.Buttons>
-                    )}
-                </Toolbar.Wrap>
-
-                <Raindrops 
+                <Path 
                     collection={collection}
                     collections={collections}
-                    user={user}
-                    items={raindrops.items} />
-            </Page.Content>
+                    user={user} />
 
-            <Page.Pagination 
-                page={options.page}
-                perpage={options.perpage}
-                count={raindrops.count}
-                getHref={page=>{
-                    const params = new URLSearchParams(options)
-                    params.set('page', page)
-                    return `${baseUrl}/${params.toString()}`
-                }} />
+                <Page.Header.Wrap>
+                    <Page.Header.Icon>
+                        <CollectionCover 
+                            {...collection}
+                            size='large'
+                            fallback={false} />
+                    </Page.Header.Icon>
+                    
+                    <Page.Header.Title>{collection.title}</Page.Header.Title>
 
-            <Page.Footer />
-        </Page.Wrap>
+                    <Page.Header.Buttons>
+                        <Button 
+                            variant='flat'
+                            href={`/${user.name}/${collection.slug}-${collection._id}/share`}
+                            bold>
+                            <Icon name='upload-2' />
+                        </Button>
+
+                        <Button 
+                            variant='flat' 
+                            href={`/${user.name}/${collection.slug}-${collection._id}/search`}
+                            data-prefetch={false}
+                            title='Search'>
+                            <Icon name='search' />
+                        </Button>
+                        
+                        <Button 
+                            variant='flat' 
+                            href={links.site.index}
+                            title='Raindrop.io'>
+                            <Logo />
+                        </Button>
+                    </Page.Header.Buttons>
+                </Page.Header.Wrap>
+
+                <Page.Subheader>
+                    {!!collection.description && (
+                        <h2>
+                            {collection.description}
+                        </h2>
+                    )}
+
+                    {!parseInt(options.page) && (
+                        <Collections
+                            items={childrens}
+                            user={user} />
+                    )}
+                </Page.Subheader>
+
+                <Page.Content>
+                    <Toolbar.Wrap>
+                        <Toolbar.Title>
+                            {options.search ? options.search : raindrops.count+' bookmarks'}
+                        </Toolbar.Title>
+
+                        {!!raindrops.items.length && (
+                            <Toolbar.Buttons>
+                                <Sort
+                                    options={options} />
+                            </Toolbar.Buttons>
+                        )}
+                    </Toolbar.Wrap>
+
+                    <Raindrops 
+                        collection={collection}
+                        collections={collections}
+                        user={user}
+                        items={raindrops.items} />
+                </Page.Content>
+
+                <Page.Pagination 
+                    page={options.page}
+                    perpage={options.perpage}
+                    count={raindrops.count} />
+
+                <Page.Footer />
+            </Page.Wrap>
+        </LinkFactory.Provider>
 	)
 }

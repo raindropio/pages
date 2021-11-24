@@ -1,8 +1,13 @@
-import { useMemo } from 'react'
+import { useMemo, useCallback } from 'react'
+import { navigate } from 'vite-plugin-ssr/client/router'
+
+import { useLinkFactory } from '~modules/router'
 import { Select } from '~co/button'
 import Icon from '~co/icon'
 
-export default function RaindropsSort({ onChange, options={} }) {
+export default function RaindropsSort({ options={} }) {
+    const getLink = useLinkFactory()
+
     const sort = options.sort
     const sorts = useMemo(()=>[
         { separator: true, label: 'Curator specified' },
@@ -21,6 +26,10 @@ export default function RaindropsSort({ onChange, options={} }) {
             { value: 'score', label: 'By relevance', dir: 'desc' }
         ] : []
     ], [options])
+
+    const onChange = useCallback(sort=>{
+        navigate(getLink({ sort }))
+    }, [getLink])
 
     return (
         <Select 

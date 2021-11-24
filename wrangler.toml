@@ -8,7 +8,12 @@ compatibility_date = "2021-09-29"
 bucket = "./dist/client"
 entry-point = "./worker"
 
+[env.development]
+name = "pages-dev"
+workers_dev = true
+vars = { STAGE = "development", SITE_URL = "" }
+
 [env.production]
 name = "pages-prod"
 routes = ["pub.raindrop.io/*"]
-vars = { SITE_URL = "https://pub.raindrop.io" }
+vars = { STAGE = "production", SITE_URL = "https://pub.raindrop.io" }

@@ -1,41 +1,24 @@
-import { getAssetFromKV } from '@cloudflare/kv-asset-handler'
+import { getAssetFromKV, NotFoundError } from '@cloudflare/kv-asset-handler'
 
-const DEBUG = true
+const isProd = typeof STAGE == 'string' && STAGE == 'production'
 
 export async function handleStaticAssets(event) {
 	let options = {}
 
 	try {
-		if (DEBUG)
+		if (!isProd)
 			options.cacheControl = {
 				bypassCache: true,
 			}
 
-		const page = await getAssetFromKV(event, options)
-
-		//headers
-		const response = new Response(page.body, page)
-		response.headers.set('X-XSS-Protection', '1; mode=block')
-		response.headers.set('X-Content-Type-Options', 'nosniff')
-		response.headers.set('X-Frame-Options', 'DENY')
-		response.headers.set('Referrer-Policy', 'unsafe-url')
-		response.headers.set('Feature-Policy', 'none')
-
-		return response
+		return getAssetFromKV(event, options)
 	} catch (e) {
-		if (!DEBUG)
-			try {
-				let notFoundResponse = await getAssetFromKV(event, {
-					mapRequestToAsset: (req) =>
-					new Request(`${new URL(req.url).origin}/404.html`, req),
-				})
+		if (e instanceof NotFoundError)
+			return new Response('Not found', { status: 500 })
 
-				return new Response(notFoundResponse.body, {
-					...notFoundResponse,
-					status: 404,
-				})
-			} catch (e) {}
-
-		return new Response(e.message || e.toString(), { status: 500 });
+		return new Response(
+			isProd ? 'Server error' : e.message || e.toString(),
+			{ status: 500 }
+		)
 	}
 }
