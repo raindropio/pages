@@ -7,9 +7,9 @@ const src = path.resolve(__dirname, 'src')
 
 export default {
 	root: src,
-	base: process.env.BASE_URL || '/',
 	build: {
-		outDir: '../dist'
+		outDir: '../dist',
+		assetsDir: '__pages_assets__'
 	},
 	resolve: {
 		alias: [{

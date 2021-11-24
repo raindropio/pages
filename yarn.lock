@@ -276,7 +276,7 @@
   dependencies:
     "mime" "^3.0.0"
 
-"@cloudflare/wrangler@1.19.x":
+"@cloudflare/wrangler@^1.19.5":
   "integrity" "sha512-fVyJfzS2FNETmdIQAZRf1Zgq9uuFHfHQtLgUSMC/FKCkRxNN2wES/F1/PYn5OXQqnYkUZf1dKW3xoLi5lY4U0Q=="
   "resolved" "https://registry.npmjs.org/@cloudflare/wrangler/-/wrangler-1.19.5.tgz"
   "version" "1.19.5"

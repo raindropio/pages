@@ -26,5 +26,5 @@ async function handleFetchEvent(event) {
 
 function isAssetUrl(url) {
 	const { pathname } = new URL(url)
-	return pathname.startsWith('/assets/')
+	return pathname.startsWith('/__pages_assets__/')
 }

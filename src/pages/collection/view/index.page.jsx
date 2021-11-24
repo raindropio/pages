@@ -89,7 +89,7 @@ export default function Collection({ statusCode, collection, collections, raindr
                     <link 
                         rel='alternate'
                         type='application/json+oembed'
-                        href={`${import.meta.env.BASE_URL}api/oembed?url=${encodeURIComponent(fullUrl)}`}
+                        href={`https://pub.raindrop.io/api/oembed?url=${encodeURIComponent(fullUrl)}`}
                         title={collection.title} />
                     <link 
                         rel='alternate'

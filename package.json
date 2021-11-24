@@ -7,12 +7,12 @@
 	"scripts": {
 		"local": "node ./etc/dev-server",
 		"preview": "yarn build:vite && sudo wrangler dev --port 80",
-		"deploy:prod": "BASE_URL=https://pub.raindrop.io yarn build:vite && wrangler publish --env production",
+		"deploy:prod": "yarn build:vite && wrangler publish --env production",
 		"build:vite": "vite build && vite build --ssr"
 	},
 	"dependencies": {
 		"@cloudflare/kv-asset-handler": "0.2.x",
-		"@cloudflare/wrangler": "1.19.x",
+		"@cloudflare/wrangler": "^1.19.5",
 		"@vitejs/plugin-react": "1.1.x",
 		"color-convert": "^2.0.1",
 		"date-fns": "2.x",

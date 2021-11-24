@@ -14,3 +14,8 @@ But optimized for Cloudflare Worker for now.
     - renderer          Different root index files for client/server env
 - worker                Source of Cloudflare Worker
 - wrangler.toml         Cloudflare Worker specific
+
+## Todo
+[] BaseURL
+[] Sentry
+[] Loading indicator

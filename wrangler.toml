@@ -14,6 +14,6 @@ entry-point = "./worker"
 
 [env.production]
 name = "pages-prod"
-routes = ["pub.raindrop.io/*"]
+routes = ["https://pub.raindrop.io/*"]
 workers_dev = false
 vars = { STAGE = "production" }
