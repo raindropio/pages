@@ -14,6 +14,12 @@ export default function App({ children }) {
 			</Helmet>
 
 			{children}
+
+			<script
+				src="https://raindrop.io/pb/site.js"
+				data-domain='raindrop.io'
+				data-api='https://raindrop.io/pb/api/event'
+				data-exclude='' />
 		</>
 	)
 }
