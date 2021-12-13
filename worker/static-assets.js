@@ -6,10 +6,11 @@ export async function handleStaticAssets(event) {
 	let options = {}
 
 	try {
-		if (!isProd)
-			options.cacheControl = {
-				bypassCache: true,
-			}
+		options.cacheControl = {
+			bypassCache: !isProd,
+			browserTTL: 365 * 60 * 60 * 24, // 365 days
+			edgeTTL: 365 * 60 * 60 * 24, // 365 days
+		}
 
 		return getAssetFromKV(event, options)
 	} catch (e) {

@@ -31,7 +31,7 @@ export async function onBeforeRender({ routeParams: { id, user_name, options } }
             pageContext: { 
                 statusCode: 404,
                 headers: {
-                    'Cache-Control': 'public,max-age=10'
+                    'Cache-Control': 'public,max-age=120'
                 }
             }
         }
@@ -46,7 +46,7 @@ export async function onBeforeRender({ routeParams: { id, user_name, options } }
                 options
             },
             headers: {
-                'Cache-Control': 'public,max-age=3'
+                'Cache-Control': 'public,max-age=60'
             }
         }
     }

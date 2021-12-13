@@ -16,9 +16,19 @@ addEventListener('fetch', (event) => {
 
 async function handleFetchEvent(event) {
 	if (!isAssetUrl(event.request.url)) {
-		const response = await handleSsr(
-			new URL(event.request.url).toString() //be sure to wrap it in URL(), otherwise some urls fail
-		)
+		//check cached
+		let response = await caches.default.match(event.request)
+
+		if (!response) {
+			response = await handleSsr(
+				new URL(event.request.url).toString() //be sure to wrap it in URL(), otherwise some urls fail
+			)
+
+			//save to cache
+			if (response && response.ok && response.headers.get('cache-control')) 
+				event.waitUntil(caches.default.put(event.request, response.clone()))
+		}
+
 		if (response !== null) return response
 	}
 	

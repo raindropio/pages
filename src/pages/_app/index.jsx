@@ -16,7 +16,7 @@ export default function App({ children }) {
 			{children}
 
 			<script
-				src="https://raindrop.io/pb/site.js"
+				src="https://raindrop.io/pb/s.js"
 				data-domain='raindrop.io'
 				data-api='https://raindrop.io/pb/api/event'
 				data-exclude='' />
