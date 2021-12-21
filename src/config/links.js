@@ -7,6 +7,7 @@ export default {
     },
     help: {
         embed: 'https://help.raindrop.io/embed',
-        publicPage: 'https://help.raindrop.io/public-page'
+        publicPage: 'https://help.raindrop.io/public-page',
+        search: 'https://help.raindrop.io/using-search'
     }
 }

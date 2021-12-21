@@ -1,6 +1,6 @@
 .form {
     display: grid;
-    grid-template-columns: min-content 1fr;
+    grid-template-columns: max-content 1fr;
     grid-gap: var(--padding-large);
     padding: var(--padding-regular) 0;
 }

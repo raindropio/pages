@@ -164,19 +164,38 @@ export default function ShareCollection({ statusCode, collection, user, options 
                             options={[{value:'', label: 'Custom (curator specified)'}, {value:'-created', label: 'By date (newest)'}, {value: 'created', label: 'By date (oldest)'}, {value: 'title', label: 'By name (A-Z)'}, {value: '-title', label: 'By name (Z-A)'}]} />
                     </div>
 
-                    <Label>Search</Label>
+                    <Label>
+                        Filter
+
+                        <Button 
+                            href={links.help.search+'#operators'}
+                            target='_blank'
+                            size='small' 
+                            variant='flat'>
+                            <Icon name='question' size='small' />
+                        </Button>
+                    </Label>
                     <Input name='search' placeholder='By #tag, title, etc...' />
                     
-                    <Label>Appearance</Label>
-                    <Fields>
-                        <div>
-                            <Select 
-                                name='theme'
-                                options={[{value:'', label: 'Light theme'}, {value: 'dark', label: 'Dark theme'}, {value: 'auto', label: 'Automatic theme (light or dark depending on user preferences)'}]} />
-                        </div>
+                    <Label>Theme</Label>
+                    <div>
+                        <Select 
+                            name='theme'
+                            options={[{value:'', label: 'Light'}, {value: 'dark', label: 'Dark'}, {value: 'auto', label: 'Automatic (light or dark depending on user preferences)'}]} />
+                    </div>
 
-                        <Input name='hide' placeholder='Hide some elements (separated by comma)...' />
-                    </Fields>
+                    <Label>
+                        Hide elements
+
+                        <Button 
+                            href={links.help.embed+'#hide-some-elements'}
+                            target='_blank'
+                            size='small' 
+                            variant='flat'>
+                            <Icon name='question' size='small' />
+                        </Button>
+                    </Label>
+                    <Input name='hide' placeholder='Separated by comma...' />
 
                     <Label>Preview</Label>
                     <Fields inset>

@@ -5,4 +5,9 @@
     color: var(--text-color-secondary);
     padding-top: var(--padding-small);
     padding-left: var(--padding-large);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--padding-small);
 }

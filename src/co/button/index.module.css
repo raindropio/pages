@@ -7,6 +7,7 @@
     white-space: nowrap;
     flex-shrink: 0;
     max-width: 100%;
+    vertical-align: middle;
 
     height: var(--this-button-size);
     line-height: var(--this-button-size);
