@@ -14,6 +14,10 @@ export async function getByUserId(userId, options={}) {
         return []
 
     return items
+        .map(item=>({
+            ...item,
+            slug: item.slug || 'a'
+        }))
 }
 
 export async function getByUserName(user_name, options={}) {
@@ -29,4 +33,8 @@ export async function getByUserName(user_name, options={}) {
         return []
 
     return items
+        .map(item=>({
+            ...item,
+            slug: item.slug || 'a'
+        }))
 }

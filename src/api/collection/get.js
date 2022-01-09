@@ -14,5 +14,7 @@ export async function get(id) {
     if (!result)
         return null
 
+    item.slug = item.slug || 'a'
+
     return item
 }

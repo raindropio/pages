@@ -50,7 +50,6 @@
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    overflow: clip;
     white-space: pre;
     white-space: pre-wrap;
 }

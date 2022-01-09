@@ -1942,13 +1942,13 @@
   "version" "2.3.0"
 
 "postcss@^8.3.8":
-  "integrity" "sha512-hCmlUAIlUiav8Xdqw3Io4LcpA1DOt7h3LSTAC4G6JGHFFaWzI6qvFt9oilvl8BmkbBRX1IhM90ZAmpk68zccQA=="
-  "resolved" "https://registry.npmjs.org/postcss/-/postcss-8.3.11.tgz"
-  "version" "8.3.11"
+  "integrity" "sha512-jBDboWM8qpaqwkMwItqTQTiFikhs/67OYVvblFFTM7MrZjt6yMKd6r2kgXizEbTTljacm4NldIlZnhbjr84QYg=="
+  "resolved" "https://registry.npmjs.org/postcss/-/postcss-8.4.5.tgz"
+  "version" "8.4.5"
   dependencies:
     "nanoid" "^3.1.30"
     "picocolors" "^1.0.0"
-    "source-map-js" "^0.6.2"
+    "source-map-js" "^1.0.1"
 
 "prelude-ls@^1.2.1":
   "integrity" "sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g=="
@@ -2234,10 +2234,10 @@
     "astral-regex" "^2.0.0"
     "is-fullwidth-code-point" "^3.0.0"
 
-"source-map-js@^0.6.2":
-  "integrity" "sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug=="
-  "resolved" "https://registry.npmjs.org/source-map-js/-/source-map-js-0.6.2.tgz"
-  "version" "0.6.2"
+"source-map-js@^1.0.1":
+  "integrity" "sha512-4+TN2b3tqOCd/kaGRJ/sTYA0tR0mdXx26ipdolxcwtJVqEnqNYvlCAt1q3ypy4QMlYus+Zh34RNtYLoq2oQ4IA=="
+  "resolved" "https://registry.npmjs.org/source-map-js/-/source-map-js-1.0.1.tgz"
+  "version" "1.0.1"
 
 "source-map@^0.5.0":
   "integrity" "sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w="
@@ -2436,7 +2436,7 @@
   "resolved" "https://registry.npmjs.org/vite-plugin-import-build/-/vite-plugin-import-build-0.1.2.tgz"
   "version" "0.1.2"
 
-"vite-plugin-ssr@0.3.x":
+"vite-plugin-ssr@0.3.31":
   "integrity" "sha512-pZVJwtm4JvceFPZnI7YP4BoyWKF4tkMnz4tY8Hv73VYDQhQkRxCdxTRuHIXqnh4A6uOh8hdg4lLXXOrClEif5Q=="
   "resolved" "https://registry.npmjs.org/vite-plugin-ssr/-/vite-plugin-ssr-0.3.31.tgz"
   "version" "0.3.31"

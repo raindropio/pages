@@ -24,7 +24,7 @@
 		"react-helmet": "6.x",
 		"react-portal": "^4.2.1",
 		"vite": "2.6.x",
-		"vite-plugin-ssr": "0.3.x",
+		"vite-plugin-ssr": "0.3.31",
 		"vite-plugin-svgr": "0.6.x"
 	},
 	"devDependencies": {
