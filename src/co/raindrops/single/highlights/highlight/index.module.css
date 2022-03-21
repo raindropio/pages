@@ -1,0 +1,40 @@
+.highlight {
+    display: grid;
+    grid-auto-flow: row;
+    gap: var(--line-size);
+}
+
+.text, .note {
+    padding-left: var(--padding-regular);
+    
+    display: -webkit-box;
+    line-clamp: 5;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    white-space: pre;
+    white-space: pre-wrap;
+}
+
+.text {
+    position: relative;
+    font-size: var(--font-size-regular)
+}
+
+.text:before {
+    content: '';
+    position: absolute;
+    left: 0;top:1px;bottom:1px;
+    width: 3px;
+    border-radius: 3px;
+    background: var(--highlight-color, #ffee00);
+    background-image: linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.3) 100%);
+}
+
+.note {
+    font-size: var(--font-size-small);
+    color: var(--text-color-secondary)
+}
+
+.note * {
+    vertical-align: -2px;
+}

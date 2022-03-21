@@ -10,6 +10,7 @@ import Important from './important'
 import Creator from './creator'
 import Type from './type'
 import Add from './add'
+import Highlights from './highlights'
 
 export default function RaindropsSingle(props) {
     const { item, collection, target, options={} } = props
@@ -36,6 +37,8 @@ export default function RaindropsSingle(props) {
                             {item.excerpt}
                         </div>
                     )}
+
+                    <Highlights className={s.highlights} {...props} />
 
                     <Buttons tight className={s.filters}>
                         <Important {...props} />

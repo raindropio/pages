@@ -1,0 +1,13 @@
+.highlights {
+    margin: calc(var(--padding-small) * 2) 0;
+    box-shadow: inset 0 0 0 var(--line-size) var(--line-color);
+    border-radius: var(--border-radius-regular);
+}
+
+.item {
+    padding: var(--padding-regular)
+}
+
+.item:not(:last-child) {
+    box-shadow: 0 var(--line-size) 0 var(--line-color);
+}

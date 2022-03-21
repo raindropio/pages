@@ -29,7 +29,7 @@
     flex: 1;
     display: grid;
     grid-gap: var(--padding-small);
-    grid-template-areas: 'title' 'excerpt' 'filters' 'info';
+    grid-template-areas: 'title' 'excerpt' 'highlights' 'filters' 'info';
     grid-template-columns: 100%;
     grid-template-rows: min-content min-content 1fr min-content;
 }
@@ -52,6 +52,10 @@
     overflow: hidden;
     white-space: pre;
     white-space: pre-wrap;
+}
+
+.highlights {
+    grid-area: highlights;
 }
 
 .filters {

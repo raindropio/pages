@@ -1,6 +1,6 @@
 .listing {
     margin: 0 calc(var(--padding-large) * -1);
-    --grid-item-width: 350px;
+    --grid-item-width: 300px;
 }
 
 .grid .items {
