@@ -135,7 +135,7 @@ a.permalink {
     display: none;
 }
 
-.list:hover .excerpt {
+.single:hover .excerpt {
     display: block; /*show full text when is truncated*/
 }
 
