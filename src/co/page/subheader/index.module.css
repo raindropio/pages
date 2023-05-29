@@ -19,4 +19,5 @@
     color: var(--text-color-secondary);
     font-size: var(--font-size-h2);
     line-height: 145%;
+    white-space: pre-wrap;
 }

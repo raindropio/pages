@@ -7,7 +7,7 @@
 	"scripts": {
 		"local": "node ./etc/dev-server",
 		"preview": "yarn build:vite && sudo wrangler dev --port 80",
-		"deploy:prod": "yarn build:vite && wrangler publish --env production",
+		"deploy:prod": "NODE_OPTIONS=--openssl-legacy-provider yarn build:vite && wrangler publish --env production",
 		"build:vite": "vite build && vite build --ssr"
 	},
 	"dependencies": {
