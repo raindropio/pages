@@ -29,7 +29,7 @@
     flex: 1;
     display: grid;
     grid-gap: var(--padding-small);
-    grid-template-areas: 'title' 'excerpt' 'highlights' 'filters' 'info';
+    grid-template-areas: 'title' 'note' 'highlights' 'filters' 'info';
     grid-template-columns: 100%;
     grid-template-rows: min-content min-content 1fr min-content;
 }
@@ -40,11 +40,11 @@
     word-break: break-word;
 }
 
-.excerpt {
-    grid-area: excerpt;
+.note {
+    grid-area: note;
 }
 
-.title, .excerpt {
+.title, .note {
     display: -webkit-box;
     line-clamp: 5;
     -webkit-line-clamp: 5;
@@ -130,12 +130,12 @@ a.permalink {
     top: var(--padding-large)
 }
 
-.simple .excerpt,
+.simple .note,
 .simple .type {
     display: none;
 }
 
-.single:hover .excerpt {
+.single:hover .note {
     display: block; /*show full text when is truncated*/
 }
 

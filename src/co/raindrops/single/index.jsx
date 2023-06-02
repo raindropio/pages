@@ -1,6 +1,7 @@
 import s from './index.module.css'
 import { Buttons } from '~co/button'
 import { ShortDate } from '~modules/format/date'
+import Markdown from 'markdown-to-jsx'
 
 import Info from '~co/layout/info'
 import Cover from './cover'
@@ -32,11 +33,14 @@ export default function RaindropsSingle(props) {
                         {item.title}
                     </div>
 
-                    {!!item.excerpt && !options.hide?.includes('excerpt') && (
-                        <div className={s.excerpt}>
-                            {item.excerpt}
+                    {(
+                        (item.note && !options.hide?.includes('note')) ||
+                        (item.excerpt && !options.hide?.includes('excerpt'))
+                    ) ? (
+                        <div className={s.note}>
+                            {item.note ? <Markdown>{item.note}</Markdown> : item.excerpt}
                         </div>
-                    )}
+                    ) : null}
 
                     <Highlights className={s.highlights} {...props} />
 

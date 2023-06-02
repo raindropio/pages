@@ -4,6 +4,7 @@ import { RAINDROPS_PER_PAGE } from '~config/raindrops'
 import { parseQueryParams } from '~modules/format/url'
 import links from '~config/links'
 import find from 'lodash-es/find'
+import Markdown from 'markdown-to-jsx'
 
 import Page from '~co/page'
 import { LinkFactory } from '~modules/router'
@@ -165,7 +166,9 @@ export default function Collection({ statusCode, collection, collections, raindr
                 <Page.Subheader>
                     {!!collection.description && (
                         <h2>
-                            {collection.description}
+                            <Markdown>
+                                {collection.description}
+                            </Markdown>
                         </h2>
                     )}
 
