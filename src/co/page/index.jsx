@@ -10,7 +10,7 @@ import Pagination from './pagination'
 import Path from './path'
 
 export default {
-    Wrap: function({ children, theme='light', wide=false, embed=false, accentColor, className='' }) {
+    Wrap: function({ children, theme='auto', wide=false, embed=false, accentColor, className='' }) {
         return (
             <div 
                 className={t.theme + ' ' + s.page + ' ' + className}

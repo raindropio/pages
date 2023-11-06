@@ -56,7 +56,7 @@
 /* Dark theme */
 @mixin dark() {
     /* colors */
-    --background-hsl-regular: 0,0%,19%;
+    --background-hsl-regular: 0,0%,10%;
     --background-color-regular: hsl(var(--background-hsl-regular));
     --background-color-secondary: #222222;
     --background-color-disabled: rgba(255,255,255,.15);
