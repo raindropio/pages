@@ -1,5 +1,7 @@
 # Raindrop.io Public Pages for Collection / User
 
+USE NODE 16 TO DEPLOY
+
 ## Implementation
 Build with `vite` & `vite-ssr-plugin`. Can be run on any serverless environment.
 But optimized for Cloudflare Worker for now.

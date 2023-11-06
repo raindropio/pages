@@ -1,7 +1,7 @@
 # node
 node_modules
-package-lock.json
 
 # outputs
 /worker/worker/
 /dist/
+.DS_Store
