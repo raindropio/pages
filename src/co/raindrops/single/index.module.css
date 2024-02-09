@@ -45,13 +45,14 @@
 }
 
 .title, .note {
-    display: -webkit-box;
+    display: block;
+    /* display: -webkit-box;
     line-clamp: 5;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
     white-space: pre;
-    white-space: pre-wrap;
+    white-space: pre-wrap; */
 }
 
 .highlights {
