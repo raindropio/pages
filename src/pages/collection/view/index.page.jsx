@@ -42,7 +42,7 @@ export async function onBeforeRender({ routeParams: { id, user_name, options } }
 
 	const raindrops = await Api.raindrops.get(id, {
 		...options,
-		nested: user.config?.nested_view_legacy ? false : true
+		nested: true//user.config?.nested_view_legacy ? false : true
 	})
 
 	return {
