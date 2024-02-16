@@ -46,6 +46,7 @@
 
 .title, .note {
     display: block;
+    word-wrap: break-word;
     /* display: -webkit-box;
     line-clamp: 5;
     -webkit-line-clamp: 5;

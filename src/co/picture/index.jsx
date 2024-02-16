@@ -26,7 +26,6 @@ export default function Image({ className='', src, width, height, ar, mode, alt,
             <source srcSet={`${link}&dpr=1 1x, ${link}&dpr=2 2x`} />
 
             <img 
-                loading='lazy'
                 decoding='async'
                 alt={alt} />
         </picture>
