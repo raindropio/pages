@@ -28,7 +28,8 @@
 .about {
     flex: 1;
     display: grid;
-    grid-gap: var(--padding-small);
+    column-gap: var(--padding-small);
+    row-gap: 1px;
     grid-template-areas: 'title' 'note' 'highlights' 'filters' 'info';
     grid-template-columns: 100%;
     grid-template-rows: min-content min-content 1fr min-content;

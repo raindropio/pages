@@ -118,7 +118,7 @@ export default function ShareUser({ statusCode, user, options }) {
                         <div>
                             <Select 
                                 name='theme'
-                                options={[{value:'', label: 'Light theme'}, {value: 'dark', label: 'Dark theme'}, {value: 'auto', label: 'Automatic theme (light or dark depending on user preferences)'}]} />
+                                options={[{value: '', label: 'Automatic (light or dark depending on user preferences)'}, {value:'light', label: 'Light'}, {value: 'dark', label: 'Dark'}]} />
                         </div>
                         <Checkbox name='no-header'>Hide header</Checkbox>
                     </Fields>
