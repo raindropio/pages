@@ -26,7 +26,7 @@ async function startServer() {
 
 	const renderPage = createPageRenderer({ viteDevServer, isProduction, root })
 	app.get('*', async (req, res, next) => {
-		const { httpResponse, statusCode, headers={}, redirect, json } = await renderPage({
+		const { httpResponse, statusCode, headers={}, redirect, json, proxy } = await renderPage({
 			url: req.originalUrl
 		})
 
@@ -38,12 +38,18 @@ async function startServer() {
 
 		if (redirect) {
 			return res.redirect(statusCode||302, redirect)
-		} else if (json) {
+		} else if (proxy) {
+			const r = await fetch(proxy)
+			r.body.pipe(res)
+			return res
+				.status(r.status)
+				.type(r.headers.get('content-type'))
+		} else if (json)
 			return res
 				.status(statusCode || 200)
 				.set(headers)
 				.json(json)
-		} else if (!httpResponse)
+		else if (!httpResponse)
 			return next()
 		
 		res

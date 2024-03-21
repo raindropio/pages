@@ -7,7 +7,7 @@ import App from '~pages/_app'
 
 export const passToClient = ['pageProps', 'statusCode']
 
-export function render({ Page, pageProps={}, statusCode, headers={}, redirect, json }) {
+export function render({ Page, pageProps={}, statusCode, headers={}, redirect, json, proxy }) {
 	var documentHtml = null
 
 	if (Page) {
@@ -57,6 +57,7 @@ export function render({ Page, pageProps={}, statusCode, headers={}, redirect, j
 			},
 			redirect,
 			json,
+			proxy
 		}
 	}
 }

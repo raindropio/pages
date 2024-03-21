@@ -116,11 +116,9 @@ export default function Collection({ statusCode, collection, collections, raindr
                     <meta name='twitter:label1' content='Created by' />
                     <meta name='twitter:data1' content={user.name} />
 
-                    {!!collection.cover?.length && [
-                        <link key='icon' rel='icon' type='image/png' href={collection.cover[0]} />,
-                        <meta key='ti' name='twitter:image' content={collection.cover[0]} />,
-                        <meta key='oi' name='og:image' content={collection.cover[0]} />
-                    ]}
+                    <meta name='twitter:image' content={`https://pub.raindrop.io/api/ogimage?url=${encodeURIComponent(fullUrl)}&v=${new Date(collection.lastUpdate).getTime()}`} />
+                    <meta name='og:image' content={`https://pub.raindrop.io/api/ogimage?url=${encodeURIComponent(fullUrl)}&v=${new Date(collection.lastUpdate).getTime()}`} />
+                    {!!collection.cover?.length && <link rel='icon' type='image/png' href={collection.cover[0]} />}
                 </Helmet>
 
                 <Path 

@@ -61,8 +61,8 @@ export default function UserIndex({ statusCode, user, collections }) {
                 <meta name='twitter:card' content='summary_large_image' />
 
                 {!!user.avatar && <link rel='icon' type='image/png' href={user.avatar} />}
-                {!!user.avatar && <meta name='twitter:image' content={user.avatar} />}
-                {!!user.avatar && <meta name='og:image' content={user.avatar} />}
+                <meta name='twitter:image' content={`https://pub.raindrop.io/api/ogimage?url=${encodeURIComponent(url)}&v=${new Date(user.lastAction).getTime()}`} />
+                <meta name='og:image' content={`https://pub.raindrop.io/api/ogimage?url=${encodeURIComponent(url)}&v=${new Date(user.lastAction).getTime()}`} />
             </Helmet>
 
             <Page.Header.Wrap>
