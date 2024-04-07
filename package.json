@@ -33,6 +33,7 @@
 		"eslint-plugin-react": "7.x",
 		"eslint-plugin-react-hooks": "4.x",
 		"node-fetch": "2.x",
-		"sass": "1.43.x"
+		"sass": "1.43.x",
+		"yarn": "^1.22.22"
 	}
 }

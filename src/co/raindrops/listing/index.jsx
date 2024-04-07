@@ -6,7 +6,7 @@ export * from './useInfiniteScroll'
 
 export default function RaindropsListing({ target, items=[], collection, collections, user, options }) {
     const hide = useMemo(()=>[
-        ...(options?.hide||[]),
+        ...(options?.hide||'').split(',').map(h=>h.trim()),
         ...(user.config?.raindrops_hide||[])
             .filter(h=>h.startsWith(collection.view+'_'))
             .map(h=>h.replace(collection.view+'_', ''))
