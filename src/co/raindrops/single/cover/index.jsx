@@ -5,8 +5,8 @@ import { FAVICON_ENDPOINT } from '~config/api'
 let sizes = {
     default: {
         width: 92,
-        height: 69,
-        mode: 'crop'
+        // height: 69,
+        // mode: 'crop'
     },
     simple: {
         width: 24,
