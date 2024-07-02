@@ -143,7 +143,7 @@ a.permalink {
 }
 
 /* grid, masonry */
-.grid, .masonry {
+.grid {
     box-shadow: inset 0 calc(var(--line-size) * -1) var(--line-color), inset calc(var(--line-size) * -1) 0 var(--line-color);
 }
 
@@ -165,7 +165,7 @@ a.permalink {
 }
 
 .masonry {
-    display: inline-block;
-    vertical-align: top;
+    display: block;
+    page-break-inside: avoid;
     width: 100%;
 }
