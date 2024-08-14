@@ -45,7 +45,7 @@ export function Image({ src, ...etc }) {
         <Base
             {...etc}
             key={src}
-            src={`${THUMBNAILS_ENDPOINT}?url=${encodeURIComponent(src)}&mode=crop&width=${width}&height=${width}&dpr=2`}
+            src={`${THUMBNAILS_ENDPOINT}/${encodeURIComponent(src)}?mode=crop&width=${width}&height=${width}&dpr=2`}
             decoding='async'
             as='img' />
     )
