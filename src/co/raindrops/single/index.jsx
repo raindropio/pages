@@ -38,7 +38,7 @@ export default function RaindropsSingle(props) {
                         (item.excerpt && !options.hide?.includes('excerpt'))
                     ) ? (
                         <div className={s.note}>
-                            {item.note ? <Markdown>{item.note}</Markdown> : item.excerpt}
+                            {item.note ? <Markdown options={{ disableParsingRawHTML: true }}>{item.note}</Markdown> : item.excerpt}
                         </div>
                     ) : null}
 

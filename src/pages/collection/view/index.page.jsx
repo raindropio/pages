@@ -164,7 +164,7 @@ export default function Collection({ statusCode, collection, collections, raindr
                 <Page.Subheader>
                     {!!collection.description && (
                         <h2>
-                            <Markdown>
+                            <Markdown options={{ disableParsingRawHTML: true }}>
                                 {collection.description}
                             </Markdown>
                         </h2>
