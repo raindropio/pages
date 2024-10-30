@@ -19,10 +19,6 @@ import Toolbar from '~co/layout/toolbar'
 import Sort from '~co/raindrops/sort'
 
 export async function onBeforeRender({ routeParams: { id, user_name, options } }) {
-	options = parseQueryParams(options)
-	options.sort = options.sort || '-sort'
-	options.perpage = options.perpage || RAINDROPS_PER_PAGE
-
 	const [ collections, user ] = await Promise.all([
 		Api.collections.getByUserName(user_name),
 		Api.user.getByName(user_name)
@@ -40,9 +36,14 @@ export async function onBeforeRender({ routeParams: { id, user_name, options } }
             }
         }
 
+    const haveNested = collections.some(c=>c.parent?.$id == collection._id)
+    options = parseQueryParams(options)
+	options.sort = options.sort || haveNested ? '-created' : '-sort'
+	options.perpage = parseInt(options.perpage || RAINDROPS_PER_PAGE)
+
 	const raindrops = await Api.raindrops.get(id, {
 		...options,
-		nested: true//user.config?.nested_view_legacy ? false : true
+		nested: haveNested
 	})
 
 	return {

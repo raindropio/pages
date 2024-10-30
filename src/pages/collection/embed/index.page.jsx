@@ -13,13 +13,8 @@ import Raindrops, { useInfiniteScroll } from '~co/raindrops/listing'
 import Toolbar from '~co/layout/toolbar'
 
 export async function onBeforeRender({ routeParams: { id, user_name, options } }) {
-	options = parseQueryParams(options)
-	options.sort = options.sort || '-sort'
-	options.perpage = parseInt(options.perpage || RAINDROPS_PER_PAGE)
-
-	const [ collections, raindrops, user ] = await Promise.all([
+	const [ collections, user ] = await Promise.all([
 		Api.collections.getByUserName(user_name),
-		Api.raindrops.get(id, options),
 		Api.user.getByName(user_name)
 	])
 
@@ -35,6 +30,16 @@ export async function onBeforeRender({ routeParams: { id, user_name, options } }
                 }
             }
         }
+
+    const haveNested = collections.some(c=>c.parent?.$id == collection._id)
+    options = parseQueryParams(options)
+    options.sort = options.sort || haveNested ? '-created' : '-sort'
+    options.perpage = parseInt(options.perpage || RAINDROPS_PER_PAGE)
+
+    const raindrops = await Api.raindrops.get(id, {
+        ...options,
+        nested: haveNested
+    })
 
 	return {
 		pageContext: {
