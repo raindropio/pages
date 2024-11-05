@@ -38,7 +38,7 @@ export async function onBeforeRender({ routeParams: { id, user_name, options } }
 
     const haveNested = collections.some(c=>c.parent?.$id == collection._id)
     options = parseQueryParams(options)
-	options.sort = options.sort || haveNested ? '-created' : '-sort'
+	options.sort = options.sort || (haveNested ? '-created' : '-sort')
 	options.perpage = parseInt(options.perpage || RAINDROPS_PER_PAGE)
 
 	const raindrops = await Api.raindrops.get(id, {
