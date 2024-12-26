@@ -18,7 +18,8 @@ export default function RaindropsSingle(props) {
 
     return (
         <article
-            className={s.single+' '+s[collection.view]}>
+            className={s.single+' '+s[collection.view]}
+            data-hide-cover={options.hide?.includes?.('cover')}>
             <div className={s.item}>
                 <Cover
                     {...props}

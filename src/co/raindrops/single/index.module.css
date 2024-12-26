@@ -169,3 +169,12 @@ a.permalink {
     page-break-inside: avoid;
     width: 100%;
 }
+
+/* Hide cover */
+[data-hide-cover="true"] .item {
+    grid-template-areas: 'item';
+    grid-template-columns: 1fr;
+}
+[data-hide-cover="true"] .cover {
+    display: none;
+}
