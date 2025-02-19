@@ -43,7 +43,9 @@ export default function RaindropsSingle(props) {
                         </div>
                     ) : null}
 
-                    <Highlights className={s.highlights} {...props} />
+                    {!options.hide?.includes('highlights') && (
+                        <Highlights className={s.highlights} {...props} />
+                    )}
 
                     <Buttons tight className={s.filters}>
                         <Important {...props} />
