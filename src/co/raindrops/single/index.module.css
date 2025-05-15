@@ -43,6 +43,7 @@
 
 .note {
     grid-area: note;
+    min-width: 0;
 }
 
 .title, .note {

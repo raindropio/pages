@@ -6,8 +6,8 @@
 	},
 	"scripts": {
 		"local": "node ./etc/dev-server",
-		"preview": "yarn build:vite && sudo wrangler dev --port 80",
-		"deploy:prod": "yarn build:vite && wrangler publish --env production",
+		"preview": "npm run build:vite && sudo wrangler dev --port 80",
+		"deploy:prod": "npm run build:vite && DEBUG=wrangler:* wrangler publish --env production --verbose",
 		"build:vite": "vite build && vite build --ssr"
 	},
 	"dependencies": {
@@ -33,7 +33,6 @@
 		"eslint-plugin-react": "7.x",
 		"eslint-plugin-react-hooks": "4.x",
 		"node-fetch": "2.x",
-		"sass": "1.43.x",
-		"yarn": "^1.22.22"
+		"sass": "1.43.x"
 	}
 }
