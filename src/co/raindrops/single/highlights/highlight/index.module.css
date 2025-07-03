@@ -6,14 +6,16 @@
 
 .text, .note {
     padding-left: var(--padding-regular);
+    word-wrap: break-word;
+    white-space: pre-line;
     
-    display: -webkit-box;
+    /* display: -webkit-box;
     line-clamp: 5;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     white-space: pre;
     white-space: pre-wrap;
-    overflow: hidden;
+    overflow: hidden; */
 }
 
 .text {
