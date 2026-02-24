@@ -68,8 +68,8 @@ export default function ShareCollection({ statusCode, collection, user, options 
 	if (statusCode)
 		return null
 
-    const baseUrl = `/${user.name}/${collection.slug}-${collection._id}/share`
-	const canonicalUrl = `${links.site.index}/${user.name}/${collection.slug}-${collection._id}`
+    const baseUrl = `/${collection.slug}-${collection._id}/share`
+	const canonicalUrl = `https://${user.name}.${links.pub.domain}/${collection.slug}-${collection._id}`
 
 	//form
 	const value = useMemo(

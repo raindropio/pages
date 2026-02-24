@@ -60,7 +60,7 @@ export default function SearchScreen({ statusCode, collection, collections, rain
 	if (statusCode)
 		return null
 
-    const collectionUrl = `/${user.name}/${collection.slug}-${collection._id}`
+    const collectionUrl = `/${collection.slug}-${collection._id}`
     const baseUrl = `${collectionUrl}/search`
 		
 	return (

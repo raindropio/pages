@@ -10,21 +10,23 @@ const base = {
     height: 450
 }
 
-const regex = /^\/([a-zA-Z0-9][a-zA-Z0-9\-_]*)$/
+const usernameRegex = /^[a-zA-Z0-9][a-zA-Z0-9\-_]*$/
 
 export function validateURL(url) {
-    const { pathname } = new URL(url)
-    return regex.test(pathname)
+    const { hostname, pathname } = new URL(url)
+    const parts = hostname.split('.')
+    return hostname.endsWith(links.pub.domain) && parts.length >= 3 &&
+        usernameRegex.test(parts[0]) && (pathname === '/' || pathname === '')
 }
 
 export function getHTML({ user }, options={}) {
     const { height, ...etc } = options
 
-    const url = `${links.site.index}/${user.name}/embed/me`+(
+    const url = `https://${user.name}.${links.pub.domain}/embed/me`+(
         Object.keys(etc).length ? '/'+new URLSearchParams(etc) : ''
     )
 
-    return (`<iframe 
+    return (`<iframe
         style="border: 0; width: 100%; height: ${height || base.height}px;"
         allowfullscreen
         frameborder="0"
@@ -33,7 +35,7 @@ export function getHTML({ user }, options={}) {
 }
 
 export default async function getJSON(url) {
-    const [ pathname, user_name ] = new URL(url).pathname.match(regex)
+    const user_name = new URL(url).hostname.split('.')[0]
 
     const user = await Api.user.getByName(user_name)
 
@@ -43,8 +45,8 @@ export default async function getJSON(url) {
     return {
         ...base,
         title: user.name+' bookmarks',
-        thumbnail_url: user.avatar ? 
-            user.avatar : 
+        thumbnail_url: user.avatar ?
+            user.avatar :
             `${import.meta.env.BASE_URL}icon_128.png`,
         thumbnail_width: 128,
         thumbnail_height: 128,

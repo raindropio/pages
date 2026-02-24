@@ -19,6 +19,9 @@ async function startServer() {
 		viteDevServer = await vite.createServer({
 			root,
 			server: { middlewareMode: true },
+			define: {
+				DOMAIN: JSON.stringify('dev.raindrop.io')
+			}
 		})
 
 		app.use(viteDevServer.middlewares)
@@ -26,9 +29,12 @@ async function startServer() {
 
 	const renderPage = createPageRenderer({ viteDevServer, isProduction, root })
 	app.get('*', async (req, res, next) => {
-		const { httpResponse, statusCode, headers={}, redirect, json, proxy } = await renderPage({
-			url: req.originalUrl
-		})
+		const hostname = (req.get('host') || '').split(':')[0]
+		const subdomain = hostname.includes('.') ? hostname.split('.')[0] : null
+		const url = subdomain && !req.originalUrl.startsWith('/api/')
+			? `/${subdomain}` + (req.originalUrl !== '/' ? req.originalUrl : '')
+			: req.originalUrl
+		const { httpResponse, statusCode, headers={}, redirect, json, proxy } = await renderPage({ url })
 
 		//remove caching headers for dev
 		if (!isProduction)
@@ -43,7 +49,7 @@ async function startServer() {
 			r.body.pipe(res)
 			return res
 				.status(r.status)
-				.type(r.headers.get('content-type'))
+				.type(r.headers.get('content-type') || 'application/octet-stream')
 		} else if (json)
 			return res
 				.status(statusCode || 200)

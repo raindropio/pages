@@ -10,21 +10,22 @@ const base = {
     height: 450
 }
 
-const regex = /^\/(.+)\/(.+)(\/|-)(\d+)/
+const pathRegex = /^\/(.+)-(\d+)/
 
 export function validateURL(url) {
-    const { pathname } = new URL(url)
-    return regex.test(pathname)
+    const { hostname, pathname } = new URL(url)
+    const parts = hostname.split('.')
+    return hostname.endsWith(links.pub.domain) && parts.length >= 3 && pathRegex.test(pathname)
 }
 
 export function getHTML({ user, collection }, options={}) {
     const { height, ...etc } = options
 
-    const url = `${links.site.index}/${user.name}/${collection.slug}-${collection._id}/embed`+(
+    const url = `https://${user.name}.${links.pub.domain}/${collection.slug}-${collection._id}/embed`+(
         Object.keys(etc).length ? '/'+new URLSearchParams(etc) : ''
     )
 
-    return (`<iframe 
+    return (`<iframe
         style="border: 0; width: 100%; height: ${height || base.height}px;"
         allowfullscreen
         frameborder="0"
@@ -33,7 +34,9 @@ export function getHTML({ user, collection }, options={}) {
 }
 
 export default async function getJSON(url) {
-    const [ pathname, user_name, slugOrSection, separator, id ] = new URL(url).pathname.match(regex)
+    const { hostname, pathname } = new URL(url)
+    const user_name = hostname.split('.')[0]
+    const [, , id] = pathname.match(pathRegex)
 
     const [ collection, user ] = await Promise.all([
         Api.collection.get(id),
@@ -47,9 +50,9 @@ export default async function getJSON(url) {
         ...base,
         title: collection.title,
         author_name: user_name,
-        author_url: `${links.site.index}/${user_name}`,
-        thumbnail_url: collection.cover?.length ? 
-            collection.cover[0] : 
+        author_url: `https://${user_name}.${links.pub.domain}`,
+        thumbnail_url: collection.cover?.length ?
+            collection.cover[0] :
             `${import.meta.env.BASE_URL}icon_128.png`,
         thumbnail_width: 128,
         thumbnail_height: 128,

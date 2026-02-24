@@ -2,12 +2,17 @@ export async function onBeforeRender({ url }) {
     const query = Object.fromEntries(new URL(url, 'http://localhost').searchParams)
     const destination = query.url || ''
 
-    if (!destination.startsWith('https://raindrop.io'))
+    try {
+        const { hostname } = new URL(destination)
+        if (!hostname.endsWith(DOMAIN))
+            throw new Error()
+    } catch(e) {
         return {
             pageContext: {
                 statusCode: 404
             }
         }
+    }
 
     return {
         pageContext: {

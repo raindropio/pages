@@ -46,8 +46,8 @@ export default function ShareUser({ statusCode, user, options }) {
 	if (statusCode)
 		return null
 
-    const baseUrl = `/${user.name}/share/me`
-	const canonicalUrl = `${links.site.index}/${user.name}`
+    const baseUrl = `/share/me`
+	const canonicalUrl = `https://${user.name}.${links.pub.domain}`
 
 	//form
 	const value = useMemo(

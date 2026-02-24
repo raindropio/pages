@@ -1,6 +1,12 @@
+if (typeof DOMAIN != 'string' || !DOMAIN)
+    throw new Error('DOMAIN variable is not set')
+
 export default {
     site: {
         index: import.meta.env.PROD ? 'https://raindrop.io' : 'http://dev.raindrop.io'
+    },
+    pub: {
+        domain: DOMAIN
     },
     app: {
         index: 'https://app.raindrop.io'

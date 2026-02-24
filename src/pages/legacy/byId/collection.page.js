@@ -14,7 +14,7 @@ async function getUrl(id, { q, sort='' }) {
 
     cache[id] = collection
 
-    return `/${collection.user.name}/${collection.slug}-${collection._id}${q ? '/search' : ''}/${new URLSearchParams({
+    return `https://${collection.user.name}.${links.pub.domain}/${collection.slug}-${collection._id}${q ? '/search' : ''}/${new URLSearchParams({
         sort,
         ...(q ? {
             search: q
@@ -52,7 +52,7 @@ export async function onBeforeRender({ routeParams: { id }, url }) {
 
     return {
         pageContext: {
-            redirect: `${links.site.index}${destination}`
+            redirect: destination
         }
     }
 }

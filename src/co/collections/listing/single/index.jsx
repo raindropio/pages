@@ -4,7 +4,7 @@ import colorConvert from 'color-convert'
 
 import Cover from '../../cover'
 
-export default function CollectionsSingle({ item, user, target }) {
+export default function CollectionsSingle({ item, target }) {
     const folderStyle = useMemo(()=>
         item.color ? {
             '--bg-rgb': colorConvert.hex.rgb(item.color.replace('#',''))
@@ -14,7 +14,7 @@ export default function CollectionsSingle({ item, user, target }) {
 
     return (
         <a 
-            href={`/${user.name}/${item.slug}-${item._id}`}
+            href={`/${item.slug}-${item._id}`}
             data-prefetch={false}
             target={target}
             className={s.single}>

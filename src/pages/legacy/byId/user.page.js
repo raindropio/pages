@@ -9,21 +9,21 @@ async function getUrl(id) {
     const user = await Api.user.getById(id)
     if (!user) return cache[id]=null
 
-    return cache[id]=`/${user.name}`
+    return cache[id] = `https://${user.name}.${links.pub.domain}`
 }
 
 export async function onBeforeRender({ routeParams: { id } }) {
     if (isNaN(id))
         return {
-            pageContext: { 
+            pageContext: {
                 statusCode: 404
             }
         }
-        
+
     const url = await getUrl(id)
     if (!url)
         return {
-            pageContext: { 
+            pageContext: {
                 statusCode: 404
             }
         }
@@ -31,7 +31,7 @@ export async function onBeforeRender({ routeParams: { id } }) {
     return {
         pageContext: {
             statusCode: 308,
-            redirect: `${links.site.index}${url}`
+            redirect: url
         }
     }
 }

@@ -61,7 +61,7 @@ export default function EmbedCollection({ statusCode, collection, collections, r
 	if (statusCode)
 		return null
 
-    const baseUrl = `/${user.name}/${collection.slug}-${collection._id}`
+    const baseUrl = `/${collection.slug}-${collection._id}`
 	const items = useInfiniteScroll(collection, raindrops, options)
 		
 	return (
@@ -96,7 +96,7 @@ export default function EmbedCollection({ statusCode, collection, collections, r
                             {!!user.avatar && (
                                 <Button 
                                     variant='flat' 
-                                    href={`/${user.name}`}
+                                    href='/'
                                     title={user.name}
                                     target='_blank'>
                                     <Avatar 

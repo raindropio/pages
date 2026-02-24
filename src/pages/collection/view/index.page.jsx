@@ -66,8 +66,8 @@ export default function Collection({ statusCode, collection, collections, raindr
 	if (statusCode)
 		return null
 
-    const baseUrl = `/${user.name}/${collection.slug}-${collection._id}`
-	const fullUrl = `${links.site.index}${baseUrl}`
+    const baseUrl = `/${collection.slug}-${collection._id}`
+	const fullUrl = `https://${user.name}.${links.pub.domain}${baseUrl}`
 	const description = collection.description || `${raindrops.count} bookmarks`
 
 	const childrens = useChildrens(collections, collection)
@@ -91,7 +91,7 @@ export default function Collection({ statusCode, collection, collections, raindr
                     <link 
                         rel='alternate'
                         type='application/json+oembed'
-                        href={`https://pub.raindrop.io/api/oembed?url=${encodeURIComponent(fullUrl)}`}
+                        href={`https://${links.pub.domain}/api/oembed?url=${encodeURIComponent(fullUrl)}`}
                         title={collection.title} />
                     <link 
                         rel='alternate'
@@ -117,8 +117,8 @@ export default function Collection({ statusCode, collection, collections, raindr
                     <meta name='twitter:label1' content='Created by' />
                     <meta name='twitter:data1' content={user.name} />
 
-                    <meta name='twitter:image' content={`https://pub.raindrop.io/api/ogimage?url=${encodeURIComponent(fullUrl)}&v=${new Date(collection.lastUpdate).getTime()}`} />
-                    <meta name='og:image' content={`https://pub.raindrop.io/api/ogimage?url=${encodeURIComponent(fullUrl)}&v=${new Date(collection.lastUpdate).getTime()}`} />
+                    <meta name='twitter:image' content={`https://${links.pub.domain}/api/ogimage?url=${encodeURIComponent(fullUrl)}&v=${new Date(collection.lastUpdate).getTime()}`} />
+                    <meta name='og:image' content={`https://${links.pub.domain}/api/ogimage?url=${encodeURIComponent(fullUrl)}&v=${new Date(collection.lastUpdate).getTime()}`} />
                     {!!collection.cover?.length && <link rel='icon' type='image/png' href={collection.cover[0]} />}
                 </Helmet>
 
@@ -140,14 +140,14 @@ export default function Collection({ statusCode, collection, collections, raindr
                     <Page.Header.Buttons>
                         <Button 
                             variant='flat'
-                            href={`/${user.name}/${collection.slug}-${collection._id}/share`}
+                            href={`${baseUrl}/share`}
                             bold>
                             <Icon name='upload-2' />
                         </Button>
 
                         <Button 
                             variant='flat' 
-                            href={`/${user.name}/${collection.slug}-${collection._id}/search`}
+                            href={`${baseUrl}/search`}
                             data-prefetch={false}
                             title='Search'>
                             <Icon name='search' />

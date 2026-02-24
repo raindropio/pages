@@ -44,7 +44,7 @@ export default function UserIndex({ statusCode, user, collections }) {
 	if (statusCode)
 		return null
 
-	const url = `${links.site.index}/${user.name}`
+	const url = `https://${user.name}.${links.pub.domain}`
 
 	const root = useRoot(collections)
 
@@ -61,8 +61,8 @@ export default function UserIndex({ statusCode, user, collections }) {
                 <meta name='twitter:card' content='summary_large_image' />
 
                 {!!user.avatar && <link rel='icon' type='image/png' href={user.avatar} />}
-                <meta name='twitter:image' content={`https://pub.raindrop.io/api/ogimage?url=${encodeURIComponent(url)}&v=${new Date(user.lastAction).getTime()}`} />
-                <meta name='og:image' content={`https://pub.raindrop.io/api/ogimage?url=${encodeURIComponent(url)}&v=${new Date(user.lastAction).getTime()}`} />
+                <meta name='twitter:image' content={`https://${links.pub.domain}/api/ogimage?url=${encodeURIComponent(url)}&v=${new Date(user.lastAction).getTime()}`} />
+                <meta name='og:image' content={`https://${links.pub.domain}/api/ogimage?url=${encodeURIComponent(url)}&v=${new Date(user.lastAction).getTime()}`} />
             </Helmet>
 
             <Page.Header.Wrap>
@@ -85,7 +85,7 @@ export default function UserIndex({ statusCode, user, collections }) {
 
                 <Page.Header.Buttons>
                     <Button 
-                        href={`/${user.name}/share/me`}
+                        href='/share/me'
                         bold>
                         <Icon name='code' />
                         Embed

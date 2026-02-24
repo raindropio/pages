@@ -77,7 +77,7 @@ export default function EmbedUser({ statusCode, user, collections, options }) {
 
 					<Page.Header.Buttons>
 						<Button 
-							href={`/${user.name}`}
+							href='/'
 							target='_blank'>
 							Show all
 							<Icon name='arrow-right-up' />

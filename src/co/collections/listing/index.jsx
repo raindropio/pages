@@ -13,7 +13,7 @@ export default function CollectionsListing({ items, user, target }) {
                     target={target}
                     item={item}
                     user={user}
-                    href={`/${user.name}/${item.slug}-${item._id}`} />
+                    href={`/${item.slug}-${item._id}`} />
             ))}
         </nav>
     )

@@ -4,7 +4,18 @@ import '../dist/server/importBuild.js'
 
 const renderPage = createPageRenderer({ isProduction: true })
 
-export async function handleSsr(url) {
+function rewriteUrl(rawUrl) {
+	const url = new URL(rawUrl)
+	const suffix = '.' + DOMAIN
+	if (url.hostname.endsWith(suffix) && !url.pathname.startsWith('/api/')) {
+		const username = url.hostname.slice(0, -suffix.length)
+		url.pathname = '/' + username + (url.pathname === '/' ? '' : url.pathname)
+	}
+	return url.pathname + url.search
+}
+
+export async function handleSsr(rawUrl) {
+	const url = rewriteUrl(rawUrl)
 	const { httpResponse, statusCode, headers={}, redirect, proxy, json } = await renderPage({ url })
 
 	if (redirect) {
