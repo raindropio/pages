@@ -1,4 +1,4 @@
-export default function route(pageContext) {
+export function route(pageContext) {
 	const match = pageContext.urlPathname.match(/^\/([^/]+)\/(.+)-(\d+)\/(.+)$/)
 	if (!match) return false
 	return {

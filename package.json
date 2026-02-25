@@ -8,7 +8,7 @@
 	"scripts": {
 		"local": "vike dev",
 		"preview": "vike build && vike preview",
-		"deploy:prod": "vike build && wrangler deploy"
+		"deploy:prod": "git branch -f release/production master && git push --force origin release/production"
 	},
 	"dependencies": {
 		"@photonjs/cloudflare": "^0.1.0",

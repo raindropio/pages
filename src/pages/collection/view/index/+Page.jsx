@@ -21,7 +21,6 @@ export default function Collection() {
 	const baseUrl = `/${collection.slug}-${collection._id}`
 	const fullUrl = `https://${user.name}.${links.pub.domain}${baseUrl}`
 	const description = collection.description || `${raindrops.count} bookmarks`
-
 	const childrens = useChildrens(collections, collection)
 
 	return (
