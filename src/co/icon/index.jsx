@@ -1,5 +1,5 @@
 import s from './index.module.css'
-import { ReactComponent as BrandIcon } from '~assets/brand/icon_48.svg'
+import BrandIcon from '~assets/brand/icon_48.svg?react'
 import { THUMBNAILS_ENDPOINT } from '~config/api'
 import remixIconSymbolUrl from '~assets/remixicon.symbol.svg?url'
 

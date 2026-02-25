@@ -1,6 +1,6 @@
 import s from './index.module.css'
 import { useEffect, useState, useCallback, useRef } from 'react'
-import { navigate } from 'vite-plugin-ssr/client/router'
+import { navigate } from 'vike/client/router'
 
 import { useLinkFactory } from '~modules/router'
 import Icon, { ActivityIndicator } from '~co/icon'

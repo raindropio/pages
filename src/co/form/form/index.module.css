@@ -1,10 +1,12 @@
-.form {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    grid-gap: var(--padding-large);
-    padding: var(--padding-regular) 0;
-}
+@layer base {
+    .form {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        grid-gap: var(--padding-large);
+        padding: var(--padding-regular) 0;
+    }
 
-.form > * {
-    grid-column: 2 / -1;
+    .form > * {
+        grid-column: 2 / -1;
+    }
 }

@@ -1,1 +1,0 @@
-export default '/:user_name/embed/me/:options'

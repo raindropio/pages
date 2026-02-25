@@ -1,0 +1,163 @@
+import { Head } from 'vike-react/Head'
+import { useData } from 'vike-react/useData'
+import links from '~config/links'
+import Markdown from 'markdown-to-jsx'
+
+import Page from '~co/page'
+import { LinkFactory } from '~modules/router'
+import Button from '~co/button'
+import Icon, { Logo } from '~co/icon'
+import CollectionCover from '~co/collections/cover'
+import Path from '~co/raindrops/path'
+import Raindrops from '~co/raindrops/listing'
+import Collections from '~co/collections/compact'
+import { useChildrens } from '~co/collections/hooks'
+import Toolbar from '~co/layout/toolbar'
+import Sort from '~co/raindrops/sort'
+
+export default function Collection() {
+	const { collection, collections, raindrops, user, options } = useData()
+
+	const baseUrl = `/${collection.slug}-${collection._id}`
+	const fullUrl = `https://${user.name}.${links.pub.domain}${baseUrl}`
+	const description = collection.description || `${raindrops.count} bookmarks`
+
+	const childrens = useChildrens(collections, collection)
+
+	return (
+		<LinkFactory.Provider value={next => {
+			const params = new URLSearchParams(options)
+			params.set('page', 0)
+
+			if (Object.keys(next))
+				for (const [key, val] of Object.entries(next))
+					params.set(key, val)
+
+			return `${baseUrl}${params.get('search') ? '/search' : ''}/${params.toString()}`
+		}}>
+			<Page.Wrap
+				wide={collection.view == 'grid' || collection.view == 'masonry'}
+				theme={options.theme}
+				accentColor={collection.color}>
+				<Head>
+					<link
+						rel='alternate'
+						type='application/json+oembed'
+						href={`https://${links.pub.domain}/api/oembed?url=${encodeURIComponent(fullUrl)}`}
+						title={collection.title} />
+					<link
+						rel='alternate'
+						type='application/rss+xml'
+						href={`https://raindrop.io/collection/${collection._id}/feed`}
+						title={collection.title} />
+
+					<link rel='canonical' href={fullUrl} />
+					<meta name='twitter:url' content={fullUrl} />
+					<meta name='og:url' content={fullUrl} />
+
+					<title>{collection.title}</title>
+					<meta name='twitter:title' content={collection.title} />
+					<meta name='og:title' content={collection.title} />
+
+					<meta name='og:type' content='website' />
+					<meta name='twitter:card' content='summary_large_image' />
+
+					<meta name='description' content={description} />
+					<meta name='twitter:description' content={description} />
+					<meta name='og:description' content={description} />
+
+					<meta name='twitter:label1' content='Created by' />
+					<meta name='twitter:data1' content={user.name} />
+
+					<meta name='twitter:image' content={`https://${links.pub.domain}/api/ogimage?url=${encodeURIComponent(fullUrl)}&v=${new Date(collection.lastUpdate).getTime()}`} />
+					<meta name='og:image' content={`https://${links.pub.domain}/api/ogimage?url=${encodeURIComponent(fullUrl)}&v=${new Date(collection.lastUpdate).getTime()}`} />
+					{!!collection.cover?.length && <link rel='icon' type='image/png' href={collection.cover[0]} />}
+				</Head>
+
+				<Path
+					collection={collection}
+					collections={collections}
+					user={user} />
+
+				<Page.Header.Wrap>
+					<Page.Header.Icon>
+						<CollectionCover
+							{...collection}
+							size='large'
+							fallback={false} />
+					</Page.Header.Icon>
+
+					<Page.Header.Title>{collection.title}</Page.Header.Title>
+
+					<Page.Header.Buttons>
+						<Button
+							variant='flat'
+							href={`${baseUrl}/share`}
+							bold>
+							<Icon name='upload-2' />
+						</Button>
+
+						<Button
+							variant='flat'
+							href={`${baseUrl}/search`}
+							data-prefetch={false}
+							title='Search'>
+							<Icon name='search' />
+						</Button>
+
+						<Button
+							variant='flat'
+							href={links.site.index}
+							title='Raindrop.io'>
+							<Logo />
+						</Button>
+					</Page.Header.Buttons>
+				</Page.Header.Wrap>
+
+				<Page.Subheader>
+					{!!collection.description && (
+						<h2>
+							<Markdown options={{ disableParsingRawHTML: true }}>
+								{collection.description}
+							</Markdown>
+						</h2>
+					)}
+
+					{!parseInt(options.page) && (
+						<Collections
+							items={childrens}
+							user={user} />
+					)}
+				</Page.Subheader>
+
+				<Page.Content>
+					<Toolbar.Wrap>
+						<Toolbar.Title>
+							{options.search ? options.search : raindrops.count + ' bookmarks'}
+						</Toolbar.Title>
+
+						{!!raindrops.items.length && (
+							<Toolbar.Buttons>
+								<Sort
+									options={options} />
+							</Toolbar.Buttons>
+						)}
+					</Toolbar.Wrap>
+
+					<Raindrops
+						collection={collection}
+						collections={collections}
+						user={user}
+						items={raindrops.items} />
+				</Page.Content>
+
+				<Page.Pagination
+					page={options.page}
+					perpage={options.perpage}
+					count={raindrops.count} />
+
+				<Page.Footer />
+			</Page.Wrap>
+		</LinkFactory.Provider>
+	)
+}

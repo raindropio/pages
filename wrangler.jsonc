@@ -1,0 +1,14 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "raindrop-pages",
+	"main": "virtual:photon:cloudflare:server-entry",
+	"compatibility_date": "2026-02-24",
+	"compatibility_flags": ["nodejs_compat"],
+	"workers_dev": false,
+	"placement": { "mode": "smart" },
+	"routes": [
+		{ "pattern": "raindrop.page/*", "zone_name": "raindrop.page" },
+		{ "pattern": "*.raindrop.page/*", "zone_name": "raindrop.page" }
+	],
+	"vars": { "STAGE": "production" }
+}

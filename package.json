@@ -1,39 +1,39 @@
 {
 	"name": "pages",
 	"version": "0.0.0",
+	"type": "module",
 	"imports": {
 		"~*": "./src/*.js"
 	},
 	"scripts": {
-		"local": "node ./etc/dev-server",
-		"preview": "npm run build:vite && sudo wrangler dev --port 80",
-		"deploy:prod": "npm run build:vite && DEBUG=wrangler:* wrangler publish --env production --verbose",
-		"build:vite": "vite build && vite build --ssr"
+		"local": "vike dev",
+		"preview": "vike build && vike preview",
+		"deploy:prod": "vike build && wrangler deploy"
 	},
 	"dependencies": {
-		"@cloudflare/kv-asset-handler": "0.2.x",
-		"@cloudflare/wrangler": "^1.19.5",
-		"@vitejs/plugin-react": "1.1.x",
+		"@photonjs/cloudflare": "^0.1.0",
+		"@photonjs/hono": "^0.1.0",
+		"@vitejs/plugin-react": "^5.0.0",
 		"color-convert": "^2.0.1",
 		"date-fns": "2.x",
-		"express": "4.x",
+		"hono": "^4.0.0",
 		"lodash-es": "4.x",
 		"markdown-to-jsx": "^7.2.0",
-		"modern-normalize": "1.1.x",
-		"react": "17.x",
-		"react-dom": "17.x",
-		"react-helmet": "6.x",
+		"modern-normalize": "^3.0.0",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
 		"react-portal": "^4.2.1",
-		"vite": "2.6.x",
-		"vite-plugin-ssr": "0.3.31",
-		"vite-plugin-svgr": "0.6.x"
+		"vike": "^0.4.0",
+		"vike-react": "^0.6.20",
+		"vike-photon": "^0.1.0",
+		"vite": "^7.0.0",
+		"vite-plugin-svgr": "^4.0.0"
 	},
 	"devDependencies": {
 		"eslint": "7.x",
 		"eslint-plugin-react": "7.x",
 		"eslint-plugin-react-hooks": "4.x",
-		"node-fetch": "2.x",
-		"sass": "1.43.x",
-		"wrangler": "^3.114.17"
+		"sass": "^1.80.0",
+		"wrangler": "^4.0.0"
 	}
 }

@@ -1,7 +1,7 @@
 import s from './index.module.css'
 import t from './theme.module.scss'
 
-import Helmet from 'react-helmet'
+import { Head } from 'vike-react/Head'
 import Header from './header'
 import Subheader from './subheader'
 import Content from './content'
@@ -22,9 +22,9 @@ export default {
                         '--accent-color': accentColor
                     } : {})
                 }}>
-                <Helmet>
+                <Head>
                     <meta name='color-scheme' content={theme=='auto' ? 'dark light' : theme} />
-                </Helmet>
+                </Head>
                                 
                 {children}
             </div>

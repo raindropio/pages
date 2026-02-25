@@ -1,13 +1,15 @@
-.label {
-    grid-column: 1;
-    text-align: right;
-    font-size: var(--font-size-small);
-    color: var(--text-color-secondary);
-    padding-top: var(--padding-small);
-    padding-left: var(--padding-large);
+@layer components {
+    .label {
+        grid-column: 1;
+        text-align: right;
+        font-size: var(--font-size-small);
+        color: var(--text-color-secondary);
+        padding-top: var(--padding-small);
+        padding-left: var(--padding-large);
 
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: var(--padding-small);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: var(--padding-small);
+    }
 }

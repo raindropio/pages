@@ -1,4 +1,6 @@
-html, body, #__next {
+@layer base, components;
+
+html, body, #root {
   width: 100%;
   height: 100%;
 }

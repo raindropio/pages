@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react'
-import { navigate } from 'vite-plugin-ssr/client/router'
+import { navigate } from 'vike/client/router'
 
 import { useLinkFactory } from '~modules/router'
 import { Select } from '~co/button'
