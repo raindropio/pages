@@ -8,6 +8,7 @@
 	"scripts": {
 		"local": "vike dev",
 		"preview": "vike build && vike preview",
+		"build": "vike build",
 		"deploy:prod": "git branch -f release/production master && git push --force origin release/production"
 	},
 	"dependencies": {
