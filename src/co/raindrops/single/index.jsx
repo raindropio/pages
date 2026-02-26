@@ -79,7 +79,7 @@ export default function RaindropsSingle(props) {
                 target={target}
                 href={item.link} 
                 className={s.permalink}
-                rel='nofollow'>
+                rel='nofollow noopener noreferrer'>
                 {item.title}
             </a>
         </article>

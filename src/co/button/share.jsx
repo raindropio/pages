@@ -11,6 +11,7 @@ export function Share({ url, title }) {
             variant='flat'
             style={{color: '#1DA1F2'}}
             target='_blank'
+            rel='noopener noreferrer'
             href={`https://twitter.com/intent/tweet?via=${TWITTER_ID}&url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`}>
             <Icon 
                 name='twitter'
@@ -22,6 +23,7 @@ export function Share({ url, title }) {
             variant='flat'
             style={{color: '#4267B2'}}
             target='_blank'
+            rel='noopener noreferrer'
             href={`https://www.facebook.com/dialog/share?app_id=${FACEBOOK_APP_ID}&href=${encodeURIComponent(url)}&display=popup`}>
             <Icon 
                 name='facebook-circle'
@@ -33,6 +35,7 @@ export function Share({ url, title }) {
             variant='flat'
             style={{color: '#FF4500'}}
             target='_blank'
+            rel='noopener noreferrer'
             href={`https://www.reddit.com/submit?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`}>
             <Icon 
                 name='reddit'

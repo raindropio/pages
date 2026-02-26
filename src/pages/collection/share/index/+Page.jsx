@@ -88,7 +88,8 @@ export default function ShareCollection() {
 				<Buttons>
 					<Button
 						href={`${links.site.index}/collection/${collection._id}/feed`}
-						target='_blank'>
+						target='_blank'
+						rel='nofollow noopener noreferrer'>
 						<Icon name='rss' /> RSS
 					</Button>
 				</Buttons>
@@ -99,6 +100,7 @@ export default function ShareCollection() {
 						<Button
 							variant='flat'
 							target='_blank'
+							rel='nofollow noopener noreferrer'
 							href={links.help.embed}>
 							<Icon name='question' />
 						</Button>
@@ -135,6 +137,7 @@ export default function ShareCollection() {
 						<Button
 							href={links.help.search + '#operators'}
 							target='_blank'
+							rel='nofollow noopener noreferrer'
 							size='small'
 							variant='flat'>
 							<Icon name='question' size='small' />
@@ -155,6 +158,7 @@ export default function ShareCollection() {
 						<Button
 							href={links.help.embed + '#hide-some-elements'}
 							target='_blank'
+							rel='nofollow noopener noreferrer'
 							size='small'
 							variant='flat'>
 							<Icon name='question' size='small' />

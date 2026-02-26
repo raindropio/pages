@@ -45,7 +45,7 @@ export default function Collection() {
 						href={`https://${links.pub.domain}/api/oembed?url=${encodeURIComponent(fullUrl)}`}
 						title={collection.title} />
 					<link
-						rel='alternate'
+						rel='alternate nofollow'
 						type='application/rss+xml'
 						href={`https://raindrop.io/collection/${collection._id}/feed`}
 						title={collection.title} />
@@ -107,6 +107,7 @@ export default function Collection() {
 						<Button
 							variant='flat'
 							href={links.site.index}
+							rel='nofollow noopener noreferrer'
 							title='Raindrop.io'>
 							<Logo />
 						</Button>

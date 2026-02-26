@@ -63,6 +63,7 @@ export default function UserIndex() {
 					<Button
 						variant='flat'
 						href='https://raindrop.io'
+						rel='nofollow noopener noreferrer'
 						title='Raindrop.io'>
 						<Logo />
 					</Button>
@@ -77,6 +78,7 @@ export default function UserIndex() {
 						<Button
 							href={`https://twitter.com/${user.twitter?.screen_name}`}
 							target='_blank'
+							rel='noopener noreferrer'
 							variant='flat'
 							title='Twitter'>
 							<Icon
@@ -89,6 +91,7 @@ export default function UserIndex() {
 						<Button
 							href={`https://facebook.com/${user.facebook?.screen_name}`}
 							target='_blank'
+							rel='noopener noreferrer'
 							variant='flat'
 							title='Facebook'>
 							<Icon
