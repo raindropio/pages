@@ -42,7 +42,7 @@ export default function SearchScreen() {
 				wide={collection.view == 'grid' || collection.view == 'masonry'}
 				accentColor={collection.color}>
 				<Head>
-					<title>Search {collection.title}</title>
+					<title>{`Search ${collection.title}`}</title>
 					{!!collection.cover?.length && <link rel='icon' type='image/png' href={collection.cover[0]} />}
 					<meta name='robots' content='noindex' />
 				</Head>

@@ -10,7 +10,7 @@ export function onBeforeRoute(pageContext) {
 	return {
 		pageContext: {
 			urlLogical: '/' + username +
-				(pageContext.urlParsed.pathname === '/' ? '' : pageContext.urlParsed.pathname) +
+				(pageContext.urlParsed.pathnameOriginal === '/' ? '' : pageContext.urlParsed.pathnameOriginal) +
 				(pageContext.urlParsed.searchOriginal || '')
 		}
 	}

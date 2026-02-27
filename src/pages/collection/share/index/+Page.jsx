@@ -59,7 +59,7 @@ export default function ShareCollection() {
 	return (
 		<Page.Wrap accentColor={collection.color}>
 			<Head>
-				<title>Share {collection.title}</title>
+				<title>{`Share ${collection.title}`}</title>
 				<meta name='robots' content='noindex' />
 			</Head>
 

@@ -40,7 +40,7 @@ export default function ShareUser() {
 	return (
 		<Page.Wrap>
 			<Head>
-				<title>Share {user.name}</title>
+				<title>{`Share ${user.name}`}</title>
 				<meta name='robots' content='noindex' />
 			</Head>
 
