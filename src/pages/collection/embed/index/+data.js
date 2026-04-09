@@ -1,14 +1,22 @@
-import Api from '~api'
+import Api, { FetchError } from '~api'
 import { RAINDROPS_PER_PAGE } from '~config/raindrops'
 import { parseQueryParams } from '~modules/format/url'
 import { render } from 'vike/abort'
 import find from 'lodash-es/find'
 
 export async function data({ routeParams: { id, user_name, options } }) {
-	const [collections, user] = await Promise.all([
-		Api.collections.getByUserName(user_name),
-		Api.user.getByName(user_name)
-	])
+	var user, collections
+	try {
+		var [user, collections] = await Promise.all([
+			Api.user.getByName(user_name),
+			Api.collections.getByUserName(user_name)
+		])
+	} catch(e) {
+		if (e instanceof FetchError)
+			throw render(e.status, e.message)
+
+		throw e
+	}
 
 	const collection = find(collections, ['_id', parseInt(id)])
 
