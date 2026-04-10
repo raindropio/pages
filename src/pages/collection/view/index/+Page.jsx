@@ -30,7 +30,16 @@ export default function Collection() {
 
 			if (Object.keys(next))
 				for (const [key, val] of Object.entries(next))
-					params.set(key, val)
+					switch (key) {
+						case 'appendSearch':
+							if (!(options.search || '').includes(val))
+								params.set('search', options.search ? `${options.search.trim()} ${val}` : val)
+							break
+
+						default:
+							params.set(key, val)
+							break
+					}
 
 			return `${baseUrl}${params.get('search') ? '/search' : ''}/${params.toString()}`
 		}}>
