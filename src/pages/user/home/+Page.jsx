@@ -1,5 +1,6 @@
 import { Head } from 'vike-react/Head'
 import { useData } from 'vike-react/useData'
+import { THUMBNAILS_ENDPOINT } from '~config/api'
 import links from '~config/links'
 import Page from '~co/page'
 import Icon, { Logo, Avatar } from '~co/icon'
@@ -30,8 +31,8 @@ export default function UserIndex() {
 				<meta name='twitter:card' content='summary_large_image' />
 
 				{!!user.avatar && <link rel='icon' type='image/png' href={user.avatar} />}
-				<meta name='twitter:image' content={`https://${links.pub.domain}/api/ogimage?url=${encodeURIComponent(url)}&v=${new Date(user.lastAction).getTime()}`} />
-				<meta name='og:image' content={`https://${links.pub.domain}/api/ogimage?url=${encodeURIComponent(url)}&v=${new Date(user.lastAction).getTime()}`} />
+				<meta name='twitter:image' content={`${THUMBNAILS_ENDPOINT}/${encodeURIComponent(url)}`} />
+				<meta name='og:image' content={`${THUMBNAILS_ENDPOINT}/${encodeURIComponent(url)}`} />
 			</Head>
 
 			<Page.Header.Wrap>

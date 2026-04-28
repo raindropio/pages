@@ -2,6 +2,7 @@ import { Head } from 'vike-react/Head'
 import { useData } from 'vike-react/useData'
 import links from '~config/links'
 import Markdown from 'markdown-to-jsx'
+import { THUMBNAILS_ENDPOINT } from '~config/api'
 
 import Page from '~co/page'
 import { LinkFactory } from '~modules/router'
@@ -77,8 +78,8 @@ export default function Collection() {
 					<meta name='twitter:label1' content='Created by' />
 					<meta name='twitter:data1' content={user.name} />
 
-					<meta name='twitter:image' content={`https://${links.pub.domain}/api/ogimage?url=${encodeURIComponent(fullUrl)}&v=${new Date(collection.lastUpdate).getTime()}`} />
-					<meta name='og:image' content={`https://${links.pub.domain}/api/ogimage?url=${encodeURIComponent(fullUrl)}&v=${new Date(collection.lastUpdate).getTime()}`} />
+					<meta name='twitter:image' content={`${THUMBNAILS_ENDPOINT}/${encodeURIComponent(fullUrl)}`} />
+					<meta name='og:image' content={`${THUMBNAILS_ENDPOINT}/${encodeURIComponent(fullUrl)}`} />
 					{!!collection.cover?.length && <link rel='icon' type='image/png' href={collection.cover[0]} />}
 				</Head>
 
