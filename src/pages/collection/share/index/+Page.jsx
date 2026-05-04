@@ -87,7 +87,7 @@ export default function ShareCollection() {
 				</Toolbar.Wrap>
 				<Buttons>
 					<Button
-						href={`${links.site.index}/collection/${collection._id}/feed`}
+						href={`/${collection.slug}-${collection._id}/feed`}
 						target='_blank'
 						rel='nofollow noopener noreferrer'>
 						<Icon name='rss' /> RSS

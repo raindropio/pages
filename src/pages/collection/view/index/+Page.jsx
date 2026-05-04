@@ -57,7 +57,7 @@ export default function Collection() {
 					<link
 						rel='alternate nofollow'
 						type='application/rss+xml'
-						href={`https://raindrop.io/collection/${collection._id}/feed`}
+						href={`${baseUrl}/feed`}
 						title={collection.title} />
 
 					<link rel='canonical' href={fullUrl} />
