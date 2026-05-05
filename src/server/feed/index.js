@@ -1,61 +1,53 @@
 import Api, { FetchError } from '~api'
+import links from '~config/links'
 
-const escapeCdata = s => String(s ?? '').replace(/]]>/g, ']]]]><![CDATA[>')
-const escapeAttr = s => String(s ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-const cdata = s => `<![CDATA[ ${escapeCdata(s)} ]]>`
+const escapeXml = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+const escapeAttr = s => escapeXml(s).replace(/"/g, '&quot;')
+const collectionUrl = (author, collection) => `https://${author.name}.${links.pub.domain}/${collection.slug}-${collection._id}`
 
 function renderItem(item) {
-	const cover = Array.isArray(item.cover) ? item.cover[0] : item.cover
-	const hasCover = cover && cover != '<screenshot>'
 	const body = item.note || item.excerpt || ''
-	const description = (hasCover ? `<img src="${escapeAttr(cover)}" /><br/>` : '') + escapeCdata(body)
-	const tags = Array.isArray(item.tags) ? item.tags : []
+	const html = (item.cover && item.cover != '<screenshot>' ? `<img src="${escapeAttr(item.cover)}" /><br/>` : '') + body
 
 	return `<item>
-			<title>${cdata(item.title)}</title>
-			<link>${escapeAttr(item.link)}</link>
-			<description><![CDATA[ ${description} ]]></description>
-			<pubDate>${new Date(item.created).toUTCString()}</pubDate>
-			<guid>${escapeAttr(item.link)}</guid>
-			<category>${escapeAttr(item.type)}</category>
-			${tags.map(tag => `<category>${cdata(tag)}</category>`).join('')}
-		</item>`
+		<title>${escapeXml(item.title)}</title>
+		<link>${escapeXml(item.link)}</link>
+		<description>${escapeXml(html)}</description>
+		<pubDate>${new Date(item.created).toUTCString()}</pubDate>
+		<guid>${escapeXml(item.link)}</guid>
+		${item.tags?.map(tag => `<category>${escapeXml(tag)}</category>`).join('')}
+	</item>`
 }
 
-function renderFeed({ collection, items, host, slug_id }) {
+function renderFeed({ collection, items, author }) {
 	const cover = Array.isArray(collection.cover) ? collection.cover[0] : ''
-	const titleSuffixed = `${collection.title} / Raindrop.io`
-	const channelLink = `https://${host}`
-	const selfHref = `https://${host}/${slug_id}/feed`
+	const channelLink = collectionUrl(author, collection)
+	const selfHref = `${channelLink}/feed`
 
 	return `<?xml version="1.0" encoding="utf-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>${cdata(titleSuffixed)}</title>
-		<link>${escapeAttr(channelLink)}</link>
-		<description><![CDATA[ ]]></description>
-		<language>en-US</language>
-		<generator>raindrop.page</generator>
-		<atom:link href="${escapeAttr(selfHref)}" rel="self" type="application/rss+xml"/>
-		${cover ? `<image>
-			<url>${escapeAttr(cover)}</url>
-			<link>${escapeAttr(channelLink)}</link>
-			<title>${cdata(titleSuffixed)}</title>
-		</image>` : ''}
-		${items.length ? `<lastBuildDate>${new Date(items[0].lastUpdate).toUTCString()}</lastBuildDate>` : ''}
-		${items.map(renderItem).join('')}
-	</channel>
-</rss>`
+	<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+		<channel>
+			<title>${escapeXml(collection.title)}</title>
+			<link>${escapeXml(channelLink)}</link>
+			<description>${escapeXml(collection.description)}</description>
+			<language>en-US</language>
+			<generator>raindrop.io</generator>
+			<atom:link href="${escapeAttr(selfHref)}" rel="self" type="application/rss+xml"/>
+			${cover ? `<image>
+				<url>${escapeXml(cover)}</url>
+				<link>${escapeXml(channelLink)}</link>
+				<title>${escapeXml(collection.title)}</title>
+			</image>` : ''}
+			${items.length ? `<lastBuildDate>${new Date(items[0].lastUpdate).toUTCString()}</lastBuildDate>` : ''}
+			${items.map(renderItem).join('')}
+		</channel>
+	</rss>`
 }
 
 export default async function handleFeed(c) {
-	const slug_id = c.req.param('slug_id')
-	const match = slug_id.match(/-(\d+)$/)
-	if (!match)
+	const id = Number(c.req.param('slug_id')?.split('-').at(-1))
+	if (!id)
 		return c.text('', 404)
-
-	const id = match[1]
-	const host = c.req.header('host') || ''
 
 	let collection, raindrops
 	try {
@@ -72,10 +64,23 @@ export default async function handleFeed(c) {
 	if (!collection)
 		return c.text('', 404)
 
-	const xml = renderFeed({ collection, items: raindrops.items || [], host, slug_id })
+	const author = await Api.user.getById(collection.user.$id)
 
-	return c.body(xml, 200, {
-		'Content-Type': 'application/rss+xml; charset=utf-8',
-		'Cache-Control': 'public,max-age=3600'
-	})
+	//redirect to original user if host is not equal
+	const host = c.req.header('host')?.split('.')[0]
+	if (author.name.toLowerCase() != host?.toLowerCase())
+		return c.redirect(`${collectionUrl(author, collection)}/feed`, 301)
+
+	return c.body(
+		renderFeed({
+			collection,
+			items: raindrops.items || [],
+			author
+		}),
+		200,
+		{
+			'Content-Type': 'application/rss+xml; charset=utf-8',
+			'Cache-Control': 'public,max-age=3600'
+		}
+	)
 }
