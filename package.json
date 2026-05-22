@@ -17,7 +17,7 @@
 		"@vitejs/plugin-react": "^5.0.0",
 		"color-convert": "^2.0.1",
 		"date-fns": "^4.2.1",
-		"hono": "^4.0.0",
+		"hono": "^4.12.22",
 		"lodash-es": "4.x",
 		"markdown-to-jsx": "^7.2.0",
 		"modern-normalize": "^3.0.0",
