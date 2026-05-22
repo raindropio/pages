@@ -3,5 +3,5 @@ import vikePhoton from 'vike-photon/config'
 
 export default {
 	extends: [vikeReact, vikePhoton],
-	photon: { server: '../server/index.js' }
+	photon: { server: '../server/index.js', target: 'node' }
 }

@@ -1,9 +1,6 @@
 import React from 'react'
 
-import isToday from 'date-fns/isToday'
-import isYesterday from 'date-fns/isYesterday'
-import format from 'date-fns/format'
-import formatRelative from 'date-fns/formatRelative'
+import { format, formatRelative, isToday, isYesterday } from 'date-fns'
 import { parseDate } from './parse'
 
 export const shortDate = (original) => {
