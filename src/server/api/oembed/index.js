@@ -1,3 +1,4 @@
+import { FetchError } from '~api'
 import * as collection from './collection'
 import * as user from './user'
 
@@ -14,7 +15,13 @@ export default async function handleOembed(c) {
 		try { valid = provider.validateURL(destination) } catch(e) {}
 
 		if (valid) {
-			json = await provider.default(destination)
+			try {
+				json = await provider.default(destination)
+			} catch (e) {
+				if (e instanceof FetchError)
+					return c.json({ error: e.message }, e.status)
+				throw e
+			}
 			break
 		}
 	}

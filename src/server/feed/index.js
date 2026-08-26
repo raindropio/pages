@@ -64,7 +64,22 @@ export default async function handleFeed(c) {
 	if (!collection)
 		return c.text('', 404)
 
-	const author = await Api.user.getById(collection.user.$id)
+	let author
+	try {
+		author = await Api.user.getById(collection.user.$id)
+	} catch (e) {
+		if (e instanceof FetchError && e.message == 'email-not-confirmed') 
+			return c.text(
+				`This feed is temporarily unavailable.
+				The owner of this collection hasn't confirmed their email address yet.
+				If you are the owner, see https://help.raindrop.io/public-page#why-is-my-public-collection-not-accessible`,
+				403
+			)
+		throw e
+	}
+
+	if (!author)
+		return c.text('', 404)
 
 	//redirect to original user if host is not equal
 	const host = c.req.header('host')?.split('.')[0]
