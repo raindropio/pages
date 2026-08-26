@@ -1,5 +1,6 @@
 export function route(pageContext) {
-	const match = pageContext.urlPathname.match(/^\/([^/]+)\/(.+)-(\d+)\/(.+)$/)
+	//match the raw pathname: options must stay encoded, they are decoded exactly once in parseQueryParams
+	const match = pageContext.urlParsed.pathnameOriginal.match(/^\/([^/]+)\/(.+)-(\d+)\/(.+)$/)
 	if (!match) return false
 	return {
 		routeParams: {
