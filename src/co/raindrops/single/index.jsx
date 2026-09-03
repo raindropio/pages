@@ -30,9 +30,9 @@ export default function RaindropsSingle(props) {
                     className={s.type} />
 
                 <div className={s.about}>
-                    <div className={s.title}>
-                        {item.title}
-                    </div>
+                    {!options.hide?.includes('title') && (
+                        <div className={s.title}>{item.title}</div>
+                    )}
 
                     {(
                         (item.note && !options.hide?.includes('note')) ||

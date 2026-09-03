@@ -11,6 +11,7 @@ export default defineConfig({
 		host: true,
 		allowedHosts: ['.localhost']
 	},
+	publicDir: 'src/public',
 	build: {
 		assetsDir: '__pages_assets__'
 	},
