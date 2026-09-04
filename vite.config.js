@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite'
 import path from 'path'
 import react from '@vitejs/plugin-react'
+import vike from 'vike/plugin'
 
 import svgr from 'vite-plugin-svgr'
 
-const src = path.resolve(__dirname, 'src')
+const src = path.resolve(import.meta.dirname, 'src')
 
 export default defineConfig({
 	server: {
@@ -21,5 +22,5 @@ export default defineConfig({
 			replacement: `${src}/$1`
 		}]
 	},
-	plugins: [react(), svgr()]
+	plugins: [vike(), react(), svgr()]
 })
