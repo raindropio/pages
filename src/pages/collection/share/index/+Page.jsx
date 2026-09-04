@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useEffect, useState } from 'react'
+import DOMPurify from 'dompurify'
 import { Head } from 'vike-react/Head'
 import { useData } from 'vike-react/useData'
 import { navigate } from 'vike/client/router'
@@ -28,7 +29,9 @@ function PreviewDebounced({ html }) {
 	if (!load)
 		return null
 
-	return <div dangerouslySetInnerHTML={{ __html: html }} />
+	const safeHTML = typeof window !== 'undefined' ? DOMPurify.sanitize(html) : ''
+
+	return <div dangerouslySetInnerHTML={{ __html: safeHTML }} />
 }
 
 export default function ShareCollection() {
