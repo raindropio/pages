@@ -21,13 +21,14 @@ export function validateURL(url) {
 
 export function getHTML({ user }, options={}) {
     const { height, ...etc } = options
+    const safeHeight = Number.isFinite(parseInt(height, 10)) && parseInt(height, 10) > 0 ? parseInt(height, 10) : base.height
 
     const url = `https://${user.name}.${links.pub.domain}/embed/me`+(
         Object.keys(etc).length ? '/'+new URLSearchParams(etc) : ''
     )
 
     return (`<iframe
-        style="border: 0; width: 100%; height: ${height || base.height}px;"
+        style="border: 0; width: 100%; height: ${safeHeight}px;"
         allowfullscreen
         frameborder="0"
         src="${url}"></iframe>`)
