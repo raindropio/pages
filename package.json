@@ -24,6 +24,7 @@
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"react-portal": "^4.2.1",
+		"undici": "^8.10.1",
 		"vike": "^0.4.0",
 		"vike-photon": "^0.1.0",
 		"vike-react": "^0.6.20",
