@@ -52,8 +52,8 @@ export default async function handleFeed(c) {
 	let collection, raindrops
 	try {
 		[collection, raindrops] = await Promise.all([
-			Api.collection.get(id),
-			Api.raindrops.get(id, { perpage: 50, sort: '-created' })
+			Api.collection.get(id, { signal: c.req.raw.signal }),
+			Api.raindrops.get(id, { perpage: 50, sort: '-created' }, { signal: c.req.raw.signal })
 		])
 	} catch (e) {
 		if (e instanceof FetchError)
@@ -66,7 +66,7 @@ export default async function handleFeed(c) {
 
 	let author
 	try {
-		author = await Api.user.getById(collection.user.$id)
+		author = await Api.user.getById(collection.user.$id, { signal: c.req.raw.signal })
 	} catch (e) {
 		if (e instanceof FetchError && e.message == 'email-not-confirmed') 
 			return c.text(

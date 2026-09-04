@@ -32,14 +32,14 @@ export function getHTML({ user, collection }, options={}) {
         .replace(/\s+/g, ' ')
 }
 
-export default async function getJSON(url) {
+export default async function getJSON(url, { signal } = {}) {
     const { hostname, pathname } = new URL(url)
     const user_name = hostname.split('.')[0]
     const [, , id] = pathname.match(pathRegex)
 
     const [ collection, user ] = await Promise.all([
-        Api.collection.get(id),
-        Api.user.getByName(user_name),
+        Api.collection.get(id, { signal }),
+        Api.user.getByName(user_name, { signal }),
     ])
 
     if (!collection || !user)

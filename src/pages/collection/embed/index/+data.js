@@ -4,12 +4,13 @@ import { parseQueryParams } from '~modules/format/url'
 import { render } from 'vike/abort'
 import find from 'lodash-es/find'
 
-export async function data({ routeParams: { id, user_name, options } }) {
+export async function data({ routeParams: { id, user_name, options }, runtime }) {
+	const { signal } = runtime.hono.req.raw //abort API calls when the client disconnects
 	var user, collections
 	try {
 		var [user, collections] = await Promise.all([
-			Api.user.getByName(user_name),
-			Api.collections.getByUserName(user_name)
+			Api.user.getByName(user_name, { signal }),
+			Api.collections.getByUserName(user_name, { signal })
 		])
 	} catch(e) {
 		if (e instanceof FetchError)
@@ -31,7 +32,7 @@ export async function data({ routeParams: { id, user_name, options } }) {
 	const raindrops = await Api.raindrops.get(id, {
 		...options,
 		nested: haveNested
-	})
+	}, { signal })
 
 	return { collection, collections, raindrops, user, options }
 }

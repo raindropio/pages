@@ -5,8 +5,8 @@ Public pages for collections and user profiles, served at `https://<username>.ra
 ## Stack
 
 - [Vike](https://vike.dev) + `vike-react` (React 19, SSR)
-- `vike-photon` + [Hono](https://hono.dev), Node target (`photon.target: 'node'`)
-- Vite 7, Sass, `vite-plugin-svgr`
+- Vike's built-in `+server` (universal-deploy, Node) + [Hono](https://hono.dev) via `@vikejs/hono`
+- Vite 8, Sass, `vite-plugin-svgr`
 - Data comes from `https://api.raindrop.io/v2` via the built-in `fetch`
 
 ## Scripts
@@ -28,7 +28,7 @@ App Platform sits behind Cloudflare, so:
 
 - responses with `Cache-Control: public` are cached at the edge (pages: 20s, embeds: 60s, oembed/feed: 1h)
 - static assets in `__pages_assets__/` are hashed and served with `max-age=31536000, immutable`
-- compression is done by the edge, so it is disabled in Node (`photon.compress: false`)
+- compression is done by the edge, so it is disabled in Node (static served via `srvx/static` with `compress: false`)
 
 ## Structure
 
@@ -39,8 +39,10 @@ src/
     user/           home, share, embed
     _app/ _error/
     +onBeforeRoute  maps <username>.raindrop.page/... → /<username>/...
-    +config.js      vike / photon config (server entry, compress, static cache)
-  server/           Hono entry: /api/oembed, /<slug>-<id>/feed, then Vike handler
+    +config.js      vike config
+    +server.js      Hono entry: /api/oembed, /<slug>-<id>/feed, then Vike handler;
+                    also serves dist/client with immutable cache headers (prod only)
+  server/           handlers for oembed and rss feed
   api/              api.raindrop.io client (collection(s), raindrops, filters, user)
   co/               React components
   modules/          helpers (format, router, async, browser)

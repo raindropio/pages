@@ -34,10 +34,10 @@ export function getHTML({ user }, options={}) {
         .replace(/\s+/g, ' ')
 }
 
-export default async function getJSON(url) {
+export default async function getJSON(url, { signal } = {}) {
     const user_name = new URL(url).hostname.split('.')[0]
 
-    const user = await Api.user.getByName(user_name)
+    const user = await Api.user.getByName(user_name, { signal })
 
     if (!user)
         return null

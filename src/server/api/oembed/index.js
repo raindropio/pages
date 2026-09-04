@@ -16,7 +16,7 @@ export default async function handleOembed(c) {
 
 		if (valid) {
 			try {
-				json = await provider.default(destination)
+				json = await provider.default(destination, { signal: c.req.raw.signal })
 			} catch (e) {
 				if (e instanceof FetchError)
 					return c.json({ error: e.message }, e.status)

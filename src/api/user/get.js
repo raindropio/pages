@@ -11,8 +11,8 @@ async function toFetchError(res) {
 }
 
 //id or name
-export async function getById(id) {
-    const res = await fetch(`${API_ENDPOINT}/user/${String(id)}`)
+export async function getById(id, { signal } = {}) {
+    const res = await fetch(`${API_ENDPOINT}/user/${String(id)}`, { signal })
     if (!res.ok)
         throw await toFetchError(res)
 
@@ -24,8 +24,8 @@ export async function getById(id) {
     return user
 }
 
-export async function getByName(name) {
-    const res = await fetch(`${API_ENDPOINT}/user/name/${String(name)}`)
+export async function getByName(name, { signal } = {}) {
+    const res = await fetch(`${API_ENDPOINT}/user/name/${String(name)}`, { signal })
     if (!res.ok)
         throw await toFetchError(res)
 

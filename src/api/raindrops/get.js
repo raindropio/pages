@@ -14,8 +14,8 @@ export function optionsToQueryString(options={}) {
     return params.toString()
 }
 
-export async function get(id, options={}) {
-    const res = await fetch(`${API_ENDPOINT}/raindrops/${id}?${optionsToQueryString(options)}`)
+export async function get(id, options={}, { signal } = {}) {
+    const res = await fetch(`${API_ENDPOINT}/raindrops/${id}?${optionsToQueryString(options)}`, { signal })
     if (!res.ok)
         throw new FetchError(res.status, res.statusText)
 

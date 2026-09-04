@@ -16,6 +16,10 @@ export default defineConfig({
 	build: {
 		assetsDir: '__pages_assets__'
 	},
+	environments: {
+		//public/ only belongs in dist/client
+		ssr: { build: { copyPublicDir: false } }
+	},
 	resolve: {
 		alias: [{
 			find: /^~(.*)/,
