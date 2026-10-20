@@ -28,10 +28,10 @@ export default async function handleOembed(c) {
 
 	if (json)
 		return c.json(json, 200, {
-			'Cache-Control': 'public,max-age=3600'
+			'Cache-Control': 'public,max-age=86400,stale-while-revalidate=3600,stale-if-error=604800'
 		})
 
 	return c.json({ error: 'Invalid URL' }, 400, {
-		'Cache-Control': 'public,max-age=3600'
+		'Cache-Control': 'public,max-age=86400'
 	})
 }

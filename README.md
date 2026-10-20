@@ -26,8 +26,11 @@ to `release/production` (`npm run deploy:prod`). Node version is pinned in `pack
 
 App Platform sits behind Cloudflare, so:
 
-- responses with `Cache-Control: public` are cached at the edge (pages: 20s, embeds: 60s, oembed/feed: 1h)
-- static assets in `__pages_assets__/` are hashed and served with `max-age=31536000, immutable`
+- responses with `Cache-Control: public` are cached at the edge:
+  pages, embeds and 404/403 from the API 60s + stale-while-revalidate 1d (a stale copy is served once, the edge refreshes in the background),
+  feed 1h, oembed 1d, 404 for unknown routes 1d;
+  `stale-if-error` keeps serving the last good copy for a week when the origin or the API fails
+- all static files in `__pages_assets__/` are hashed and served with `max-age=31536000, immutable`; `/favicon.ico` redirects to the hashed file
 - compression is done by the edge, so it is disabled in Node (static served via `srvx/static` with `compress: false`)
 
 ## Structure
@@ -41,14 +44,13 @@ src/
     +onBeforeRoute  maps <username>.raindrop.page/... → /<username>/...
     +config.js      vike config
     +server.js      Hono entry: /api/oembed, /<slug>-<id>/feed, then Vike handler;
-                    also serves dist/client with immutable cache headers (prod only)
+                    also serves dist/client with cache headers (prod only)
   server/           handlers for oembed and rss feed
   api/              api.raindrop.io client (collection(s), raindrops, filters, user)
   co/               React components
   modules/          helpers (format, router, async, browser)
   config/           endpoints, links, constants
-  public/           copied to dist/client root (favicon etc), see vite.config.js publicDir
-  assets/           icons
+  assets/           icons, favicon
 ```
 
 ## Routing

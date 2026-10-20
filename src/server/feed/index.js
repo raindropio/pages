@@ -95,7 +95,7 @@ export default async function handleFeed(c) {
 		200,
 		{
 			'Content-Type': 'application/rss+xml; charset=utf-8',
-			'Cache-Control': 'public,max-age=3600'
+			'Cache-Control': 'public,max-age=3600,stale-while-revalidate=300,stale-if-error=604800'
 		}
 	)
 }

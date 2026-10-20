@@ -16,7 +16,7 @@
 		"deploy:prod": "git branch -f release/production master && git push --force origin release/production"
 	},
 	"dependencies": {
-		"@vikejs/hono": "^0.2.1",
+		"@vikejs/hono": "^0.4.1",
 		"@vitejs/plugin-react": "^6.1.1",
 		"color-convert": "^3.1.3",
 		"date-fns": "^4.4.0",

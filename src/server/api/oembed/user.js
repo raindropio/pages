@@ -1,5 +1,6 @@
 import Api from '~api'
 import links from '~config/links'
+import icon from '~assets/icon_128.png?no-inline'
 
 const base = {
     success: true,
@@ -35,7 +36,8 @@ export function getHTML({ user }, options={}) {
 }
 
 export default async function getJSON(url, { signal } = {}) {
-    const user_name = new URL(url).hostname.split('.')[0]
+    const { hostname, origin } = new URL(url)
+    const user_name = hostname.split('.')[0]
 
     const user = await Api.user.getByName(user_name, { signal })
 
@@ -47,10 +49,10 @@ export default async function getJSON(url, { signal } = {}) {
         title: user.name+' bookmarks',
         thumbnail_url: user.avatar ?
             user.avatar :
-            `${import.meta.env.BASE_URL}icon_128.png`,
+            origin + icon,
         thumbnail_width: 128,
         thumbnail_height: 128,
-        cache_age: 3600,
+        cache_age: 86400,
         html: getHTML({ user })
     }
 }

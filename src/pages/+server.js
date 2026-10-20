@@ -4,6 +4,7 @@ import vike from '@vikejs/hono'
 import { staticMiddleware } from 'srvx/static'
 import oembed from '../server/api/oembed/index.js'
 import feed from '../server/feed/index.js'
+import favicon from '../assets/favicon.ico'
 
 const app = new Hono()
 app.onError((e, c) => {
@@ -12,9 +13,14 @@ app.onError((e, c) => {
 	console.error(e)
 	return c.text('Internal Server Error', 500)
 })
+vike(app)
+app.get('/health', c => c.text('ok', 200, { 'Cache-Control': 'no-store' }))
 app.get('/api/oembed', oembed)
 app.get('/:slug_id{.+-\\d+}/feed', feed)
-vike(app)
+app.get('/favicon.ico', c => {
+	c.header('Cache-Control', 'public,max-age=86400')
+	return c.redirect(favicon, 301)
+})
 
 //Vike's default static serving (static: true) has no options: it brotli-compresses on the fly
 //and sends no Cache-Control. So serve dist/client ourselves: no compression (edge does it), immutable cache.
@@ -30,8 +36,9 @@ export default {
 	prod: {
 		static: false,
 		middleware: [async (req, next) => {
-			const res = await serveStatic(req, next)
-			if (res?.headers?.has('Cache-Control')) //add `public` for the edge cache
+			let isStatic = true
+			const res = await serveStatic(req, () => { isStatic = false; return next() })
+			if (isStatic && res?.headers?.has('Cache-Control')) //add `public` for the edge cache
 				res.headers.set('Cache-Control', 'public,' + res.headers.get('Cache-Control'))
 			return res
 		}]
