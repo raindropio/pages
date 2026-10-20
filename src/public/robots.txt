@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /*/search
+Disallow: /*/share
+Disallow: /*/embed
+Disallow: /share/
+Disallow: /embed/

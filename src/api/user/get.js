@@ -1,6 +1,5 @@
 import { API_ENDPOINT } from '~config/api'
 import { FetchError } from '../errors'
-import { apiFetch } from '../fetch'
 
 async function toFetchError(res) {
     let reason = res.statusText
@@ -13,7 +12,7 @@ async function toFetchError(res) {
 
 //id or name
 export async function getById(id, { signal } = {}) {
-    const res = await apiFetch(`${API_ENDPOINT}/user/${String(id)}`, { signal })
+    const res = await fetch(`${API_ENDPOINT}/user/${String(id)}`, { signal })
     if (!res.ok)
         throw await toFetchError(res)
 
@@ -26,7 +25,7 @@ export async function getById(id, { signal } = {}) {
 }
 
 export async function getByName(name, { signal } = {}) {
-    const res = await apiFetch(`${API_ENDPOINT}/user/name/${String(name)}`, { signal })
+    const res = await fetch(`${API_ENDPOINT}/user/name/${String(name)}`, { signal })
     if (!res.ok)
         throw await toFetchError(res)
 
