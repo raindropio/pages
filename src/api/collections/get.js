@@ -1,8 +1,9 @@
 import { API_ENDPOINT } from '~config/api'
 import { FetchError } from '../errors'
+import { apiFetch } from '../fetch'
 
 export async function getByUserId(userId, { signal } = {}) {
-    const res = await fetch(`${API_ENDPOINT}/collections/${String(userId)}`, { signal })
+    const res = await apiFetch(`${API_ENDPOINT}/collections/${String(userId)}`, { signal })
     if (!res.ok)
         throw new FetchError(res.status, res.statusText)
 
@@ -19,7 +20,7 @@ export async function getByUserId(userId, { signal } = {}) {
 }
 
 export async function getByUserName(user_name, { signal } = {}) {
-    const res = await fetch(`${API_ENDPOINT}/collections/username/${String(user_name)}`, { signal })
+    const res = await apiFetch(`${API_ENDPOINT}/collections/username/${String(user_name)}`, { signal })
     if (!res.ok)
         throw new FetchError(res.status, res.statusText)
 

@@ -1,11 +1,12 @@
 import { API_ENDPOINT } from '~config/api'
 import { FetchError } from '../errors'
+import { apiFetch } from '../fetch'
 
 export async function get(id, { signal } = {}) {
     if (typeof id == 'undefined')
         throw new FetchError(404)
 
-    const res = await fetch(`${API_ENDPOINT}/collection/${id}`, { signal })
+    const res = await apiFetch(`${API_ENDPOINT}/collection/${id}`, { signal })
     if (!res.ok)
         throw new FetchError(res.status, res.statusText)
         

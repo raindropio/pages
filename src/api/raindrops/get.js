@@ -1,5 +1,6 @@
 import { API_ENDPOINT } from '~config/api'
 import { FetchError } from '../errors'
+import { apiFetch } from '../fetch'
 
 export function optionsToQueryString(options={}) {
     const params = new URLSearchParams(options)
@@ -15,7 +16,7 @@ export function optionsToQueryString(options={}) {
 }
 
 export async function get(id, options={}, { signal } = {}) {
-    const res = await fetch(`${API_ENDPOINT}/raindrops/${id}?${optionsToQueryString(options)}`, { signal })
+    const res = await apiFetch(`${API_ENDPOINT}/raindrops/${id}?${optionsToQueryString(options)}`, { signal })
     if (!res.ok)
         throw new FetchError(res.status, res.statusText)
 
