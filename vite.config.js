@@ -16,7 +16,15 @@ export default defineConfig(({ command }) => ({
 	},
 	publicDir: false,
 	build: {
-		assetsDir: '__pages_assets__'
+		assetsDir: '__pages_assets__',
+		rolldownOptions: {
+			output: {
+				//rolldown emits a chunk per shared module (~60 tiny js/css per page), keep everything in one
+				codeSplitting: {
+					groups: [{ name: 'app', test: /\/src\// }]
+				}
+			}
+		}
 	},
 	resolve: {
 		alias: [{
