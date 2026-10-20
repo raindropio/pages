@@ -1,6 +1,5 @@
 import Api from '~api'
 import links from '~config/links'
-import icon from '~assets/icon_128.png?no-inline'
 
 const base = {
     success: true,
@@ -53,7 +52,7 @@ export default async function getJSON(url, { signal } = {}) {
         author_url: `https://${user_name}.${links.pub.domain}`,
         thumbnail_url: collection.cover?.length ?
             collection.cover[0] :
-            icon,
+            `${import.meta.env.BASE_URL}icon_128.png`,
         thumbnail_width: 128,
         thumbnail_height: 128,
         cache_age: 86400,

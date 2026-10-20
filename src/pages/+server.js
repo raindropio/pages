@@ -4,7 +4,6 @@ import vike from '@vikejs/hono'
 import { staticMiddleware } from 'srvx/static'
 import oembed from '../server/api/oembed/index.js'
 import feed from '../server/feed/index.js'
-import favicon from '../assets/favicon.ico'
 
 const app = new Hono()
 app.onError((e, c) => {
@@ -17,9 +16,10 @@ vike(app)
 app.get('/health', c => c.text('ok', 200, { 'Cache-Control': 'no-store' }))
 app.get('/api/oembed', oembed)
 app.get('/:slug_id{.+-\\d+}/feed', feed)
-app.get('/favicon.ico', c => {
-	c.header('Cache-Control', 'public,max-age=86400')
-	return c.redirect(favicon, 301)
+app.use(async (c, next) => { //Vike doesn't apply +headersResponse to pageContext.json (client-side navigation)
+	await next()
+	if (c.res.ok && c.req.path.endsWith('.pageContext.json'))
+		c.res.headers.set('Cache-Control', 'public,max-age=60,stale-while-revalidate=86400,stale-if-error=604800')
 })
 
 //Vike's default static serving (static: true) has no options: it brotli-compresses on the fly

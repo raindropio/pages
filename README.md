@@ -16,24 +16,7 @@ npm run local        # dev server (vike dev)
 npm run build        # production build → dist/
 npm run start        # node dist/server/index.mjs
 npm run preview      # build + start
-npm run deploy:prod  # force-push master → release/production
 ```
-
-## Deploy
-
-DigitalOcean App Platform, Node.js buildpack (no Dockerfile). Deploy is triggered by pushing
-to `release/production` (`npm run deploy:prod`). Node version is pinned in `package.json` → `engines`.
-
-App Platform sits behind Cloudflare, so:
-
-- responses with `Cache-Control: public` are cached at the edge:
-  pages, embeds and 404/403 from the API 60s + stale-while-revalidate 1d (a stale copy is served once, the edge refreshes in the background),
-  feed 1h, oembed 1d, 404 for unknown routes 1d;
-  `stale-if-error` keeps serving the last good copy for a week when the origin or the API fails
-- all static files in `__pages_assets__/` are hashed and served with `max-age=31536000, immutable`; `/favicon.ico` redirects to the hashed file
-- assets are referenced from `https://raindrop.page/` (`base` in `vite.config.js`, build only) so every user subdomain shares one cache entry;
-  the static middleware adds `Access-Control-Allow-Origin: *` for that
-- compression is done by the edge, so it is disabled in Node (static served via `srvx/static` with `compress: false`)
 
 ## Structure
 
@@ -52,7 +35,8 @@ src/
   co/               React components
   modules/          helpers (format, router, async, browser)
   config/           endpoints, links, constants
-  assets/           icons, favicon
+  public/           copied to dist/client root (favicon etc), see vite.config.js publicDir
+  assets/           icons
 ```
 
 ## Routing
