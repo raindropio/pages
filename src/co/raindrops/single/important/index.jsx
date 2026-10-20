@@ -1,4 +1,5 @@
 import Icon from '~co/icon'
+import HeartIcon from 'remixicon/icons/Health & Medical/heart-3-fill.svg?react'
 import Button from '~co/button'
 import { useFilterHref } from '~co/search/hooks'
 
@@ -16,8 +17,7 @@ export default function RaindropsSingleImportant({ item: { important }, target }
             target={target}
             title='Is favorite'>
             <Icon 
-                name='heart-3'
-                variant='fill' 
+                as={HeartIcon} 
                 size='small' />
         </Button>
     )

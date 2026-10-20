@@ -34,7 +34,7 @@ export function getHTML({ user, collection }, options={}) {
 }
 
 export default async function getJSON(url, { signal } = {}) {
-    const { hostname, pathname, origin } = new URL(url)
+    const { hostname, pathname } = new URL(url)
     const user_name = hostname.split('.')[0]
     const [, , id] = pathname.match(pathRegex)
 
@@ -53,7 +53,7 @@ export default async function getJSON(url, { signal } = {}) {
         author_url: `https://${user_name}.${links.pub.domain}`,
         thumbnail_url: collection.cover?.length ?
             collection.cover[0] :
-            origin + icon,
+            icon,
         thumbnail_width: 128,
         thumbnail_height: 128,
         cache_age: 86400,

@@ -2,6 +2,8 @@ import s from './index.module.css'
 import { useCallback, useContext } from 'react'
 import { Context } from '../form'
 import Icon from '~co/icon'
+import CheckboxBlankIcon from 'remixicon/icons/System/checkbox-blank-line.svg?react'
+import CheckboxIcon from 'remixicon/icons/System/checkbox-fill.svg?react'
 
 export function Checkbox({ className='', children, ...etc }) {
     const { values, onChange } = useContext(Context)
@@ -19,8 +21,7 @@ export function Checkbox({ className='', children, ...etc }) {
                     onChange={onChange} />
 
                 <Icon
-                    name={checked ? 'checkbox' : 'checkbox-blank'}
-                    variant={checked ? 'fill' : 'line'}
+                    as={checked ? CheckboxIcon : CheckboxBlankIcon}
                     className={s.icon} />
             </div>
 

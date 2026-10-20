@@ -9,6 +9,9 @@ import links from '~config/links'
 import Page from '~co/page'
 import Button, { Share, Buttons } from '~co/button'
 import Icon from '~co/icon'
+import FileCopyIcon from 'remixicon/icons/Document/file-copy-line.svg?react'
+import QuestionIcon from 'remixicon/icons/System/question-line.svg?react'
+import RssIcon from 'remixicon/icons/Device/rss-line.svg?react'
 import Path from '~co/raindrops/path'
 import Toolbar from '~co/layout/toolbar'
 import Form, { Textarea, Label, Select, Input, Fields } from '~co/form'
@@ -90,7 +93,7 @@ export default function ShareCollection() {
 						href={`/${collection.slug}-${collection._id}/feed`}
 						target='_blank'
 						rel='nofollow noopener noreferrer'>
-						<Icon name='rss' /> RSS
+						<Icon as={RssIcon} /> RSS
 					</Button>
 				</Buttons>
 
@@ -102,14 +105,14 @@ export default function ShareCollection() {
 							target='_blank'
 							rel='nofollow noopener noreferrer'
 							href={links.help.embed}>
-							<Icon name='question' />
+							<Icon as={QuestionIcon} />
 						</Button>
 
 						<Button
 							variant='active'
 							bold
 							onClick={() => copyText(value.html)}>
-							<Icon name='file-copy' />
+							<Icon as={FileCopyIcon} />
 							Copy Code
 						</Button>
 					</Toolbar.Buttons>
@@ -140,7 +143,7 @@ export default function ShareCollection() {
 							rel='nofollow noopener noreferrer'
 							size='small'
 							variant='flat'>
-							<Icon name='question' size='small' />
+							<Icon as={QuestionIcon} size='small' />
 						</Button>
 					</Label>
 					<Input name='search' placeholder='By #tag, title, etc...' />
@@ -161,7 +164,7 @@ export default function ShareCollection() {
 							rel='nofollow noopener noreferrer'
 							size='small'
 							variant='flat'>
-							<Icon name='question' size='small' />
+							<Icon as={QuestionIcon} size='small' />
 						</Button>
 					</Label>
 					<Input name='hide' placeholder='Separated by comma...' />

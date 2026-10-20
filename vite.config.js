@@ -7,7 +7,9 @@ import svgr from 'vite-plugin-svgr'
 
 const src = path.resolve(import.meta.dirname, 'src')
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+	//one asset cache entry for all user subdomains, see README
+	base: command == 'build' ? 'https://raindrop.page/' : '/',
 	server: {
 		host: true,
 		allowedHosts: ['.localhost']
@@ -23,4 +25,4 @@ export default defineConfig({
 		}]
 	},
 	plugins: [vike(), react(), svgr()]
-})
+}))

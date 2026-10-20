@@ -3,6 +3,7 @@ import last from 'lodash-es/last'
 import Info from '~co/layout/info'
 import Button from '~co/button'
 import Icon from '~co/icon'
+import ArrowLeftSIcon from 'remixicon/icons/Arrows/arrow-left-s-line.svg?react'
 
 export default {
     Wrap: function({ children }) {
@@ -17,7 +18,7 @@ export default {
                     variant='ghost'
                     title='Go back'>
                     <Icon 
-                        name='arrow-left-s'
+                        as={ArrowLeftSIcon}
                         size='small' />
                 </Button>
 

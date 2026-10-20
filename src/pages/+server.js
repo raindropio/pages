@@ -38,8 +38,10 @@ export default {
 		middleware: [async (req, next) => {
 			let isStatic = true
 			const res = await serveStatic(req, () => { isStatic = false; return next() })
-			if (isStatic && res?.headers?.has('Cache-Control')) //add `public` for the edge cache
-				res.headers.set('Cache-Control', 'public,' + res.headers.get('Cache-Control'))
+			if (isStatic && res?.headers?.has('Cache-Control')) {
+				res.headers.set('Cache-Control', 'public,' + res.headers.get('Cache-Control')) //add `public` for the edge cache
+				res.headers.set('Access-Control-Allow-Origin', '*') //assets live on raindrop.page, pages on subdomains
+			}
 			return res
 		}]
 	}

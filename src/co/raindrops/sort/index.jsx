@@ -4,6 +4,8 @@ import { navigate } from 'vike/client/router'
 import { useLinkFactory } from '~modules/router'
 import { Select } from '~co/button'
 import Icon from '~co/icon'
+import SortAscIcon from 'remixicon/icons/Editor/sort-asc.svg?react'
+import SortDescIcon from 'remixicon/icons/Editor/sort-desc.svg?react'
 
 export default function RaindropsSort({ options={} }) {
     const getLink = useLinkFactory()
@@ -39,8 +41,7 @@ export default function RaindropsSort({ options={} }) {
             onChange={onChange}>
             {({label, dir})=>(<>
                 <Icon
-                    name={`sort-${dir}`}
-                    variant=''
+                    as={dir == 'asc' ? SortAscIcon : SortDescIcon}
                     size='small' />
 
                 {label.replace(/\s\(.*\)/, '')}

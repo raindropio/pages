@@ -3,6 +3,7 @@ import { useData } from 'vike-react/useData'
 
 import Page from '~co/page'
 import Icon, { Avatar } from '~co/icon'
+import ArrowRightUpIcon from 'remixicon/icons/Arrows/arrow-right-up-line.svg?react'
 import Button from '~co/button'
 import Badge from '~co/badge'
 import Collections from '~co/collections/listing'
@@ -46,7 +47,7 @@ export default function EmbedUser() {
 							href='/'
 							target='_blank'>
 							Show all
-							<Icon name='arrow-right-up' />
+							<Icon as={ArrowRightUpIcon} />
 						</Button>
 					</Page.Header.Buttons>
 				</Page.Header.Wrap>

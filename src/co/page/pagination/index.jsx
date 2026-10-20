@@ -4,6 +4,8 @@ import { useEffect, useRef } from 'react'
 import { useLinkFactory } from '~modules/router'
 import Button from '~co/button'
 import Icon from '~co/icon'
+import ArrowLeftIcon from 'remixicon/icons/Arrows/arrow-left-line.svg?react'
+import ArrowRightIcon from 'remixicon/icons/Arrows/arrow-right-line.svg?react'
 
 export default function Pagination({ count, perpage, force=false, ...etc }) {
     const getLink = useLinkFactory()
@@ -61,14 +63,14 @@ export default function Pagination({ count, perpage, force=false, ...etc }) {
                         disabled={!page}
                         title='Previous page'
                         data-prefetch={false}>
-                        <Icon name='arrow-left' />
+                        <Icon as={ArrowLeftIcon} />
                     </Button>
 
                     <Button 
                         href={getLink({page: page+1})}
                         disabled={page >= pagesCount-1 && force != 'next'}
                         title='Next page'>
-                        <Icon name='arrow-right' />
+                        <Icon as={ArrowRightIcon} />
                     </Button>
                 </nav>
             </div>

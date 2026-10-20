@@ -1,16 +1,19 @@
 import s from './index.module.css'
 import Icon from '~co/icon'
+import FileTextIcon from 'remixicon/icons/Document/file-text-fill.svg?react'
+import HeadphoneIcon from 'remixicon/icons/Media/headphone-fill.svg?react'
+import PlayIcon from 'remixicon/icons/Media/play-fill.svg?react'
+
+const icons = {
+    video: PlayIcon,
+    document: FileTextIcon,
+    audio: HeadphoneIcon
+}
 
 export default function RaindropsSingleType({ className='', item: { type } }) {
-    let iconName = ''
+    const icon = icons[type]
 
-    switch (type) {
-        case 'video': iconName = 'play'; break
-        case 'document': iconName = 'file-text'; break
-        case 'audio': iconName = 'headphone'; break
-    }
-
-    if (!iconName)
+    if (!icon)
         return null
 
     return (
@@ -18,8 +21,7 @@ export default function RaindropsSingleType({ className='', item: { type } }) {
             <div className={s.bg}>
                 <Icon 
                     className={s.icon}
-                    name={iconName}
-                    variant='fill'
+                    as={icon}
                     size='small' />
             </div>
         </div>

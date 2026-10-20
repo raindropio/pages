@@ -31,6 +31,8 @@ App Platform sits behind Cloudflare, so:
   feed 1h, oembed 1d, 404 for unknown routes 1d;
   `stale-if-error` keeps serving the last good copy for a week when the origin or the API fails
 - all static files in `__pages_assets__/` are hashed and served with `max-age=31536000, immutable`; `/favicon.ico` redirects to the hashed file
+- assets are referenced from `https://raindrop.page/` (`base` in `vite.config.js`, build only) so every user subdomain shares one cache entry;
+  the static middleware adds `Access-Control-Allow-Origin: *` for that
 - compression is done by the edge, so it is disabled in Node (static served via `srvx/static` with `compress: false`)
 
 ## Structure

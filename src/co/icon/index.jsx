@@ -1,7 +1,6 @@
 import s from './index.module.css'
 import BrandIcon from '~assets/brand/icon_48.svg?react'
 import { THUMBNAILS_ENDPOINT } from '~config/api'
-import remixIconSymbolUrl from '~assets/remixicon.symbol.svg?url'
 
 function Base({ as='svg', size, className='', ...etc }) {
     const Component = as
@@ -14,11 +13,9 @@ function Base({ as='svg', size, className='', ...etc }) {
     )
 }
 
-export default function Icon({ name, variant='line', ...etc }) {
+export default function Icon(props) {
     return (
-        <Base {...etc} as='svg'>
-            <use xlinkHref={`${remixIconSymbolUrl}#ri-${name}${variant ? '-'+variant : ''}`}></use>
-        </Base>
+        <Base {...props} />
     )
 }
 

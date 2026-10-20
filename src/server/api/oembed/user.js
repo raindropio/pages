@@ -36,8 +36,7 @@ export function getHTML({ user }, options={}) {
 }
 
 export default async function getJSON(url, { signal } = {}) {
-    const { hostname, origin } = new URL(url)
-    const user_name = hostname.split('.')[0]
+    const user_name = new URL(url).hostname.split('.')[0]
 
     const user = await Api.user.getByName(user_name, { signal })
 
@@ -49,7 +48,7 @@ export default async function getJSON(url, { signal } = {}) {
         title: user.name+' bookmarks',
         thumbnail_url: user.avatar ?
             user.avatar :
-            origin + icon,
+            icon,
         thumbnail_width: 128,
         thumbnail_height: 128,
         cache_age: 86400,
