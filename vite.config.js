@@ -14,17 +14,22 @@ export default defineConfig({
 	},
 	publicDir: 'src/public',
 	build: {
-		assetsDir: '__pages_assets__',
-		rolldownOptions: {
-			output: {
-				//rolldown emits a chunk per shared module (~60 tiny js/css per page), keep everything in one
-				codeSplitting: {
-					groups: [{ name: 'app', test: /./ }]
-				}
-			}
-		}
+		assetsDir: '__pages_assets__'
 	},
 	environments: {
+		client: {
+			build: {
+				rolldownOptions: {
+					output: {
+						//rolldown emits a chunk per shared module (~60 tiny js/css per page), keep everything in one
+						//client only: in ssr it merges the server bootstrap with the chunk it awaits via import() → deadlock, exit 13
+						codeSplitting: {
+							groups: [{ name: 'app', test: /./ }]
+						}
+					}
+				}
+			}
+		},
 		//public/ only belongs in dist/client
 		ssr: { build: { copyPublicDir: false } }
 	},
