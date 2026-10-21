@@ -10,12 +10,10 @@ export async function data({ routeParams: { id, user_name, options }, runtime })
 	options.sort = options.sort || (options.search?.length ? 'score' : '-created')
 	options.perpage = RAINDROPS_PER_PAGE
 
-	const [collections, raindrops, user, filters = {}] = await Promise.all([
-		Api.collections.getByUserName(user_name, { signal }),
-		Api.raindrops.get(id, options, { signal }),
-		Api.user.getByName(user_name, { signal }),
-		(!options.page ? Api.filters.get(id, options, { signal }) : undefined)
-	])
+	const collections = await Api.collections.getByUserName(user_name, { signal })
+	const raindrops = await Api.raindrops.get(id, options, { signal })
+	const user = await Api.user.getByName(user_name, { signal })
+	const filters = (!options.page ? await Api.filters.get(id, options, { signal }) : undefined) ?? {}
 
 	const collection = find(collections, ['_id', parseInt(id)])
 

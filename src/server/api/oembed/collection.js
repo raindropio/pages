@@ -37,10 +37,8 @@ export default async function getJSON(url, { signal } = {}) {
     const user_name = hostname.split('.')[0]
     const [, , id] = pathname.match(pathRegex)
 
-    const [ collection, user ] = await Promise.all([
-        Api.collection.get(id, { signal }),
-        Api.user.getByName(user_name, { signal }),
-    ])
+    const collection = await Api.collection.get(id, { signal })
+    const user = await Api.user.getByName(user_name, { signal })
 
     if (!collection || !user)
         return null

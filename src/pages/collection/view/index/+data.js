@@ -8,10 +8,8 @@ export async function data({ routeParams: { id, user_name, options }, runtime })
 	const { signal } = runtime.hono.req.raw //abort API calls when the client disconnects
 	var user, collections
 	try {
-		var [user, collections] = await Promise.all([
-			Api.user.getByName(user_name, { signal }),
-			Api.collections.getByUserName(user_name, { signal })
-		])
+		user = await Api.user.getByName(user_name, { signal })
+		collections = await Api.collections.getByUserName(user_name, { signal })
 	} catch(e) {
 		if (e instanceof FetchError)
 			throw render(e.status, e.message)

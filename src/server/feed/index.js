@@ -51,10 +51,8 @@ export default async function handleFeed(c) {
 
 	let collection, raindrops
 	try {
-		[collection, raindrops] = await Promise.all([
-			Api.collection.get(id, { signal: c.req.raw.signal }),
-			Api.raindrops.get(id, { perpage: 50, sort: '-created' }, { signal: c.req.raw.signal })
-		])
+		collection = await Api.collection.get(id, { signal: c.req.raw.signal })
+		raindrops = await Api.raindrops.get(id, { perpage: 50, sort: '-created' }, { signal: c.req.raw.signal })
 	} catch (e) {
 		if (e instanceof FetchError)
 			return c.text('', e.status)

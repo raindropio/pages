@@ -6,10 +6,8 @@ export async function data({ routeParams: { user_name, options }, runtime }) {
 	const { signal } = runtime.hono.req.raw //abort API calls when the client disconnects
 	options = parseQueryParams(options)
 
-	const [user, collections] = await Promise.all([
-		Api.user.getByName(user_name, { signal }),
-		Api.collections.getByUserName(user_name, { signal })
-	])
+	const user = await Api.user.getByName(user_name, { signal })
+	const collections = await Api.collections.getByUserName(user_name, { signal })
 
 	if (!user || !collections?.length)
 		throw render(404)
