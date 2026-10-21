@@ -19,7 +19,7 @@ export default defineConfig({
 			output: {
 				//rolldown emits a chunk per shared module (~60 tiny js/css per page), keep everything in one
 				codeSplitting: {
-					groups: [{ name: 'app', test: /\/src\// }]
+					groups: [{ name: 'app', test: /./ }]
 				}
 			}
 		}

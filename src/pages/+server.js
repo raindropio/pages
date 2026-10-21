@@ -5,6 +5,7 @@ import vike from '@vikejs/hono'
 import { staticMiddleware } from 'srvx/static'
 import oembed from '../server/api/oembed/index.js'
 import feed from '../server/feed/index.js'
+import timeout from '../server/middleware/timeout.js'
 
 const app = new Hono()
 
@@ -24,6 +25,8 @@ app.use(rateLimiter({
 	keyGenerator: c => c.req.header('x-forwarded-for')?.split(',')[0].trim() || 'unknown',
 	handler: c => c.text('Too Many Requests', 429, { 'Cache-Control': 'no-store' })
 }))
+
+app.use(timeout(5_000))
 
 app.get('/api/oembed', oembed)
 app.get('/:slug_id{.+-\\d+}/feed', feed)
