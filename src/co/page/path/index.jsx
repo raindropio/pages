@@ -35,7 +35,6 @@ export default {
         return (
             <Button
                 {...props}
-                data-prefetch={false}
                 variant='flat'
                 size='small' />
         )

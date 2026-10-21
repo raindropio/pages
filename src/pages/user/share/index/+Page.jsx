@@ -1,7 +1,6 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Head } from 'vike-react/Head'
 import { useData } from 'vike-react/useData'
-import { navigate } from 'vike/client/router'
 import { getHTML } from '~server/api/oembed/user'
 import { copyText } from '~modules/browser'
 import links from '~config/links'
@@ -15,7 +14,8 @@ import Toolbar from '~co/layout/toolbar'
 import Form, { Textarea, Label, Checkbox, Fields, Select } from '~co/form'
 
 export default function ShareUser() {
-	const { user, options } = useData()
+	const { user, options: initial } = useData()
+	const [options, setOptions] = useState(initial)
 
 	const baseUrl = `/share/me`
 	const canonicalUrl = `https://${user.name}.${links.pub.domain}`
@@ -35,7 +35,8 @@ export default function ShareUser() {
 			if (!options[i])
 				delete options[i]
 
-		navigate(`${baseUrl}/${new URLSearchParams(options).toString()}`, { keepScrollPosition: true })
+		setOptions(options)
+		history.replaceState(null, '', `${baseUrl}/${new URLSearchParams(options).toString()}`)
 	}, [])
 
 	return (

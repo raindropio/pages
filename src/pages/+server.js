@@ -31,12 +31,6 @@ app.use(timeout(5_000))
 app.get('/api/oembed', oembed)
 app.get('/:slug_id{.+-\\d+}/feed', feed)
 
-app.use(async (c, next) => { //Vike doesn't apply +headersResponse to pageContext.json (client-side navigation)
-	await next()
-	if (c.res.ok && c.req.path.endsWith('.pageContext.json'))
-		c.res.headers.set('Cache-Control', 'public,max-age=60,stale-while-revalidate=86400,stale-if-error=604800')
-})
-
 const serveStatic = staticMiddleware({
 	dir: path.resolve(process.argv[1], '../../client'), //dist/client, next to the running dist/server/index.mjs
 	compress: false,

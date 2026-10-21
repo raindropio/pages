@@ -12,7 +12,6 @@ export default function RaindropsSingleImportant({ item: { important }, target }
     return (
         <Button 
             href={href}
-            data-prefetch={false}
             color='accent'
             target={target}
             title='Is favorite'>

@@ -111,7 +111,6 @@ export default function Collection() {
 						<Button
 							variant='flat'
 							href={`${baseUrl}/search`}
-							data-prefetch={false}
 							title='Search'>
 							<Icon as={SearchIcon} />
 						</Button>

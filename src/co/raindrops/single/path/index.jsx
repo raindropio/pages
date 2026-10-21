@@ -13,7 +13,6 @@ export default function RaindropsSinglePath({ target, item, user, collections })
             item={parent}
             user={user}
             target={target}
-            className={s.path}
-            data-prefetch={false} />
+            className={s.path} />
     )
 }

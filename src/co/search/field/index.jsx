@@ -1,6 +1,5 @@
 import s from './index.module.css'
 import { useEffect, useState, useCallback, useRef } from 'react'
-import { navigate } from 'vike/client/router'
 
 import { useLinkFactory } from '~modules/router'
 import Icon, { ActivityIndicator } from '~co/icon'
@@ -26,7 +25,7 @@ export default function SearchField({ value='', placeholder='Search' }) {
     //on submit
     const onFormSubmit = useCallback(e=>{
         e.preventDefault()
-        navigate(getLink({ search }))
+        location.assign(getLink({ search }))
     }, [search])
 
     const onFormClick = useCallback(e=>{
@@ -35,7 +34,7 @@ export default function SearchField({ value='', placeholder='Search' }) {
 
     const onResetClick = useCallback(e=>{
         e.preventDefault()
-        navigate(getLink({ search: '' }))
+        location.assign(getLink({ search: '' }))
     }, [])
     
     return (

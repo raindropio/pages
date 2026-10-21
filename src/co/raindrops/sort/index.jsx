@@ -1,5 +1,4 @@
 import { useMemo, useCallback } from 'react'
-import { navigate } from 'vike/client/router'
 
 import { useLinkFactory } from '~modules/router'
 import { Select } from '~co/button'
@@ -30,7 +29,7 @@ export default function RaindropsSort({ options={} }) {
     ], [options])
 
     const onChange = useCallback(sort=>{
-        navigate(getLink({ sort }))
+        location.assign(getLink({ sort }))
     }, [getLink])
 
     return (

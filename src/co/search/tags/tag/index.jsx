@@ -6,8 +6,7 @@ export default function SearchTag({ _id }) {
 
     return (
         <Button
-            href={href}
-            data-prefetch={false}>
+            href={href}>
             #{_id}
         </Button>
     )

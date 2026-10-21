@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useEffect, useState } from 'react'
 import { Head } from 'vike-react/Head'
 import { useData } from 'vike-react/useData'
-import { navigate } from 'vike/client/router'
 import { getHTML } from '~server/api/oembed/collection'
 import { copyText } from '~modules/browser'
 import links from '~config/links'
@@ -35,7 +34,8 @@ function PreviewDebounced({ html }) {
 }
 
 export default function ShareCollection() {
-	const { collection, user, options } = useData()
+	const { collection, user, options: initial } = useData()
+	const [options, setOptions] = useState(initial)
 
 	const baseUrl = `/${collection.slug}-${collection._id}/share`
 	const canonicalUrl = `https://${user.name}.${links.pub.domain}/${collection.slug}-${collection._id}`
@@ -56,7 +56,8 @@ export default function ShareCollection() {
 			if (!options[i])
 				delete options[i]
 
-		navigate(`${baseUrl}/${new URLSearchParams(options).toString()}`, { keepScrollPosition: true })
+		setOptions(options)
+		history.replaceState(null, '', `${baseUrl}/${new URLSearchParams(options).toString()}`)
 	}, [])
 
 	return (

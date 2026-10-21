@@ -63,8 +63,7 @@ export default function SearchScreen() {
 						<Button
 							variant='flat'
 							href={`${collectionUrl}/share/` + new URLSearchParams(options)}
-							title='Export & Share'
-							data-prefetch={false}>
+							title='Export & Share'>
 							<Icon as={UploadIcon} />
 						</Button>
 					</Page.Header.Buttons>

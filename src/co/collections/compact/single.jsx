@@ -5,8 +5,7 @@ export default function CollectionsCompactSingle({ item, user, ...etc }) {
     return (
         <Button
             {...etc}
-            href={`/${item.slug}-${item._id}`}
-            data-prefetch={false}>
+            href={`/${item.slug}-${item._id}`}>
             <Cover 
                 {...item} 
                 size='small'

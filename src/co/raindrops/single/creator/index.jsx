@@ -9,7 +9,6 @@ export default function RaindropsSingleCreator({ item: { creatorRef }, user, tar
     return (
         <Button 
             href={`/${creatorRef.name}`}
-            data-prefetch={false}
             target={target}
             size='small'
             variant='flat'

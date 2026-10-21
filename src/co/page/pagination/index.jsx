@@ -37,8 +37,7 @@ export default function Pagination({ count, perpage, force=false, ...etc }) {
                     id={`page-${i}`}
                     href={page != i ? getLink({page: i}) : ''}
                     className={s.page}
-                    variant={page == i ? 'active' : 'flat'}
-                    data-prefetch={false}>
+                    variant={page == i ? 'active' : 'flat'}>
                     {i+1}
                 </Button>
             )
@@ -61,8 +60,7 @@ export default function Pagination({ count, perpage, force=false, ...etc }) {
                     <Button 
                         href={getLink({page: page-1})}
                         disabled={!page}
-                        title='Previous page'
-                        data-prefetch={false}>
+                        title='Previous page'>
                         <Icon as={ArrowLeftIcon} />
                     </Button>
 
