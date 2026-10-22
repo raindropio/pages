@@ -2,7 +2,6 @@ import s from './select.module.css'
 import React, { useCallback } from 'react'
 import { Base } from './index'
 import Icon from '~co/icon'
-import ArrowDropDownIcon from 'remixicon/icons/Arrows/arrow-drop-down-line.svg?react'
 
 /*
     options = [ { value, label, ..anything } ]
@@ -29,7 +28,7 @@ export function Select({ className='', options=[], selected, children, onChange,
                     <>
                         {active.label}
                         <Icon 
-                            as={ArrowDropDownIcon}
+                            name='arrow-drop-down'
                             className={s.dropDownIcon} />
                     </>
                 )

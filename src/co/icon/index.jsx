@@ -1,5 +1,6 @@
 import s from './index.module.css'
 import BrandIcon from '~assets/brand/icon_48.svg?react'
+import sprite from '~assets/remixicon.symbol.svg?raw'
 import { THUMBNAILS_ENDPOINT } from '~config/api'
 
 function Base({ as='svg', size, className='', ...etc }) {
@@ -13,9 +14,18 @@ function Base({ as='svg', size, className='', ...etc }) {
     )
 }
 
-export default function Icon(props) {
+export default function Icon({ name, variant='line', ...etc }) {
     return (
-        <Base {...props} />
+        <Base {...etc} as='svg'>
+            <use href={`#ri-${name}${variant ? '-'+variant : ''}`}></use>
+        </Base>
+    )
+}
+
+//symbols for <Icon>, only the icons in use, once per page
+export function Sprite() {
+    return (
+        <div hidden dangerouslySetInnerHTML={{ __html: sprite }} />
     )
 }
 

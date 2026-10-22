@@ -8,8 +8,6 @@ import Page from '~co/page'
 import { LinkFactory } from '~modules/router'
 import Button from '~co/button'
 import Icon, { Logo } from '~co/icon'
-import SearchIcon from 'remixicon/icons/System/search-line.svg?react'
-import UploadIcon from 'remixicon/icons/System/upload-2-line.svg?react'
 import CollectionCover from '~co/collections/cover'
 import Path from '~co/raindrops/path'
 import Raindrops from '~co/raindrops/listing'
@@ -105,14 +103,14 @@ export default function Collection() {
 							variant='flat'
 							href={`${baseUrl}/share`}
 							bold>
-							<Icon as={UploadIcon} />
+							<Icon name='upload-2' />
 						</Button>
 
 						<Button
 							variant='flat'
 							href={`${baseUrl}/search`}
 							title='Search'>
-							<Icon as={SearchIcon} />
+							<Icon name='search' />
 						</Button>
 
 						<Button

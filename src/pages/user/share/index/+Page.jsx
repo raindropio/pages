@@ -8,7 +8,6 @@ import links from '~config/links'
 import Page from '~co/page'
 import Button, { Share } from '~co/button'
 import Icon from '~co/icon'
-import FileCopyIcon from 'remixicon/icons/Document/file-copy-line.svg?react'
 import Path from '~co/raindrops/path'
 import Toolbar from '~co/layout/toolbar'
 import Form, { Textarea, Label, Checkbox, Fields, Select } from '~co/form'
@@ -69,7 +68,7 @@ export default function ShareUser() {
 							variant='active'
 							bold
 							onClick={() => copyText(value.html)}>
-							<Icon as={FileCopyIcon} />
+							<Icon name='file-copy' />
 							Copy Code
 						</Button>
 					</Toolbar.Buttons>

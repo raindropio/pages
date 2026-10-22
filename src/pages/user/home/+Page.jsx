@@ -4,9 +4,6 @@ import { THUMBNAILS_ENDPOINT } from '~config/api'
 import links from '~config/links'
 import Page from '~co/page'
 import Icon, { Logo, Avatar } from '~co/icon'
-import CodeIcon from 'remixicon/icons/Development/code-line.svg?react'
-import FacebookCircleIcon from 'remixicon/icons/Logos/facebook-circle-fill.svg?react'
-import TwitterIcon from 'remixicon/icons/Logos/twitter-fill.svg?react'
 import Button from '~co/button'
 import Info from '~co/layout/info'
 import { ShortDate } from '~modules/format/date'
@@ -60,7 +57,7 @@ export default function UserIndex() {
 					<Button
 						href='/share/me'
 						bold>
-						<Icon as={CodeIcon} />
+						<Icon name='code' />
 						Embed
 					</Button>
 
@@ -86,7 +83,8 @@ export default function UserIndex() {
 							variant='flat'
 							title='Twitter'>
 							<Icon
-								as={TwitterIcon} />
+								name='twitter'
+								variant='fill' />
 						</Button>
 					)}
 
@@ -98,7 +96,8 @@ export default function UserIndex() {
 							variant='flat'
 							title='Facebook'>
 							<Icon
-								as={FacebookCircleIcon} />
+								name='facebook-circle'
+								variant='fill' />
 						</Button>
 					)}
 				</Info>

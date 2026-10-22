@@ -5,7 +5,6 @@ import Page from '~co/page'
 import { LinkFactory } from '~modules/router'
 import Button from '~co/button'
 import Icon from '~co/icon'
-import UploadIcon from 'remixicon/icons/System/upload-2-line.svg?react'
 import Raindrops from '~co/raindrops/listing'
 import Field from '~co/search/field'
 import Tags from '~co/search/tags'
@@ -64,7 +63,7 @@ export default function SearchScreen() {
 							variant='flat'
 							href={`${collectionUrl}/share/` + new URLSearchParams(options)}
 							title='Export & Share'>
-							<Icon as={UploadIcon} />
+							<Icon name='upload-2' />
 						</Button>
 					</Page.Header.Buttons>
 				</Page.Header.Wrap>

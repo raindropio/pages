@@ -12,7 +12,7 @@
 		"local": "vike dev",
 		"preview": "npm run build && npm run start",
 		"build": "vike build",
-		"start": "node dist/server/index.mjs",
+		"start": "NODE_ENV=production node --max-semi-space-size=64 dist/server/index.mjs",
 		"deploy:prod": "git branch -f release/production master && git push --force origin release/production"
 	},
 	"dependencies": {

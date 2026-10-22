@@ -3,7 +3,6 @@ import links from '~config/links'
 import { useCallback } from 'react'
 import Button from '~co/button'
 import Icon from '~co/icon'
-import StarIcon from 'remixicon/icons/System/star-fill.svg?react'
 
 export default function RaindropsSingleAdd({ item: { link, title } }) {
     const onClick = useCallback(e=>{
@@ -28,7 +27,7 @@ export default function RaindropsSingleAdd({ item: { link, title } }) {
                 title
             })}
             title='Add to Raindrop.io'>
-            <Icon as={StarIcon} size='small' />
+            <Icon name='star' variant='fill' size='small' />
         </Button>
     )
 }

@@ -3,8 +3,6 @@ import { useMemo, useCallback } from 'react'
 import { useLinkFactory } from '~modules/router'
 import { Select } from '~co/button'
 import Icon from '~co/icon'
-import SortAscIcon from 'remixicon/icons/Editor/sort-asc.svg?react'
-import SortDescIcon from 'remixicon/icons/Editor/sort-desc.svg?react'
 
 export default function RaindropsSort({ options={} }) {
     const getLink = useLinkFactory()
@@ -40,7 +38,8 @@ export default function RaindropsSort({ options={} }) {
             onChange={onChange}>
             {({label, dir})=>(<>
                 <Icon
-                    as={dir == 'asc' ? SortAscIcon : SortDescIcon}
+                    name={`sort-${dir}`}
+                    variant=''
                     size='small' />
 
                 {label.replace(/\s\(.*\)/, '')}

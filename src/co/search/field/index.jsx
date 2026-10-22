@@ -3,8 +3,6 @@ import { useEffect, useState, useCallback, useRef } from 'react'
 
 import { useLinkFactory } from '~modules/router'
 import Icon, { ActivityIndicator } from '~co/icon'
-import CloseIcon from 'remixicon/icons/System/close-line.svg?react'
-import SearchIcon from 'remixicon/icons/System/search-line.svg?react'
 import Button from '~co/button'
 
 export default function SearchField({ value='', placeholder='Search' }) {
@@ -49,7 +47,7 @@ export default function SearchField({ value='', placeholder='Search' }) {
             ) : (
                 <Icon 
                     className={s.magnifier}
-                    as={SearchIcon} />
+                    name='search' />
             )}
 
             <input
@@ -66,7 +64,7 @@ export default function SearchField({ value='', placeholder='Search' }) {
                     className={s.reset}
                     variant='flat'
                     onClick={onResetClick}>
-                    <Icon as={CloseIcon} />
+                    <Icon name='close' />
                 </Button>
             )}
         </form>

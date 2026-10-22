@@ -3,11 +3,6 @@ import { copyText } from '~modules/browser'
 
 import Button from './index'
 import Icon from '~co/icon'
-import FacebookCircleIcon from 'remixicon/icons/Logos/facebook-circle-fill.svg?react'
-import FileCopyIcon from 'remixicon/icons/Document/file-copy-line.svg?react'
-import MailIcon from 'remixicon/icons/Business/mail-line.svg?react'
-import RedditIcon from 'remixicon/icons/Logos/reddit-fill.svg?react'
-import TwitterIcon from 'remixicon/icons/Logos/twitter-fill.svg?react'
 
 export function Share({ url, title }) {
     return [
@@ -19,7 +14,8 @@ export function Share({ url, title }) {
             rel='noopener noreferrer'
             href={`https://twitter.com/intent/tweet?via=${TWITTER_ID}&url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`}>
             <Icon 
-                as={TwitterIcon} />
+                name='twitter'
+                variant='fill' />
         </Button>,
 
         <Button
@@ -30,7 +26,8 @@ export function Share({ url, title }) {
             rel='noopener noreferrer'
             href={`https://www.facebook.com/dialog/share?app_id=${FACEBOOK_APP_ID}&href=${encodeURIComponent(url)}&display=popup`}>
             <Icon 
-                as={FacebookCircleIcon} />
+                name='facebook-circle'
+                variant='fill' />
         </Button>,
 
         <Button
@@ -41,7 +38,8 @@ export function Share({ url, title }) {
             rel='noopener noreferrer'
             href={`https://www.reddit.com/submit?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`}>
             <Icon 
-                as={RedditIcon} />
+                name='reddit'
+                variant='fill' />
             </Button>,
 
         <Button
@@ -49,7 +47,7 @@ export function Share({ url, title }) {
             variant='flat'
             href={`mailto:?body=${encodeURIComponent(url)}`}>
             <Icon 
-                as={MailIcon} />
+                name='mail' />
         </Button>,
 
         <Button
@@ -57,7 +55,7 @@ export function Share({ url, title }) {
             variant='flat'
             onClick={()=>copyText(url)}>
             <Icon 
-                as={FileCopyIcon} />
+                name='file-copy' />
         </Button>,
     ]
 }

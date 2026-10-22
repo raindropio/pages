@@ -13,6 +13,8 @@ import Type from './type'
 import Add from './add'
 import Highlights from './highlights'
 
+const hasMarkdown = /[\n\\`*_#>\[\]!~|<&@]|^\s*[-+\d]|:\/\/|www\./
+
 export default function RaindropsSingle(props) {
     const { item, collection, target, options={} } = props
 
@@ -39,7 +41,7 @@ export default function RaindropsSingle(props) {
                         (item.excerpt && !options.hide?.includes('excerpt'))
                     ) ? (
                         <div className={s.note}>
-                            {item.note ? <Markdown options={{ disableParsingRawHTML: true }}>{item.note}</Markdown> : item.excerpt}
+                            {item.note ? (hasMarkdown.test(item.note) ? <Markdown options={{ disableParsingRawHTML: true }}>{item.note}</Markdown> : item.note) : item.excerpt}
                         </div>
                     ) : null}
 

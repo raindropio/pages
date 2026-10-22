@@ -1,6 +1,5 @@
 import s from './index.module.css'
 import Icon, { Image } from '~co/icon'
-import FolderIcon from 'remixicon/icons/Document/folder-line.svg?react'
 
 export default function CollectionCover({ className='', cover, title, size, fallback=true }) {
     if (!Array.isArray(cover) || 
@@ -8,7 +7,7 @@ export default function CollectionCover({ className='', cover, title, size, fall
         return fallback ? (
             <Icon 
                 className={s.fallback+' '+className}
-                as={FolderIcon}
+                name='folder'
                 size={size} />
         ) : null
 

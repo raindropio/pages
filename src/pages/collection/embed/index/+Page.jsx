@@ -5,7 +5,6 @@ import Page from '~co/page'
 import { LinkFactory } from '~modules/router'
 import Button from '~co/button'
 import Icon, { Avatar } from '~co/icon'
-import ArrowRightUpIcon from 'remixicon/icons/Arrows/arrow-right-up-line.svg?react'
 import CollectionCover from '~co/collections/cover'
 import Raindrops, { useInfiniteScroll } from '~co/raindrops/listing'
 import Toolbar from '~co/layout/toolbar'
@@ -42,7 +41,7 @@ export default function EmbedCollection() {
 								href={baseUrl}
 								target='_blank'>
 								More
-								<Icon as={ArrowRightUpIcon} />
+								<Icon name='arrow-right-up' />
 							</Button>
 
 							{!!user.avatar && (
