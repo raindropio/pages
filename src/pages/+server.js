@@ -6,6 +6,7 @@ import { staticMiddleware } from 'srvx/static'
 import oembed from '../server/api/oembed/index.js'
 import feed from '../server/feed/index.js'
 import timeout from '../server/middleware/timeout.js'
+import plausible from '../server/middleware/plausible.js'
 
 const app = new Hono()
 
@@ -26,6 +27,7 @@ app.use(rateLimiter({
 	handler: c => c.text('Too Many Requests', 429, { 'Cache-Control': 'no-store' })
 }))
 
+app.use(plausible)
 app.use(timeout(5_000))
 
 app.get('/api/oembed', oembed)
