@@ -17,16 +17,9 @@ app.onError((e, c) => {
 
 vike(app)
 
-app.get('/health', c => c.text('ok', 200, { 'Cache-Control': 'no-store' }))
-
-const tooManyRequests = c => c.text('Too Many Requests', 429, { 'Cache-Control': 'no-store' })
-
-app.use(rateLimiter({
-	windowMs: 60_000,
-	limit: 60,
-	keyGenerator: c => c.req.header('x-forwarded-for')?.split(',')[0].trim() || 'unknown',
-	handler: tooManyRequests
-}))
+app.get('/health', c => 
+	c.text('ok', 200, { 'Cache-Control': 'no-store' })
+)
 
 app.use(timeout(5_000))
 
@@ -34,9 +27,9 @@ app.get(
 	'/api/oembed',
 	rateLimiter({
 		windowMs: 3_600_000,
-		limit: 1,
+		limit: 30,
 		keyGenerator: c => c.req.query('url') || '',
-		handler: tooManyRequests
+		handler: c=>c.text('', 429, { 'Cache-Control': 'no-store' })
 	}),
 	oembed
 )
@@ -45,21 +38,22 @@ app.get(
 	'/:slug_id{.+-\\d+}/feed',
 	rateLimiter({
 		windowMs: 3_600_000,
-		limit: 1,
+		limit: 30,
 		keyGenerator: c => c.req.header('host') + c.req.path,
-		handler: tooManyRequests
+		handler: c=>c.text('', 429, { 'Cache-Control': 'no-store' })
 	}),
 	feed
 )
 
-//rate limit per host (public profile)
+//rate limit each subdomain
 app.use(rateLimiter({
 	windowMs: 60_000,
-	limit: 30,
+	limit: 120,
 	keyGenerator: c => c.req.header('host') || 'unknown',
-	handler: tooManyRequests
+	handler: c=>c.text('Too Many Requests', 429, { 'Cache-Control': 'no-store' })
 }))
 
+//not rate limited
 const serveStatic = staticMiddleware({
 	dir: path.resolve(process.argv[1], '../../client'), //dist/client, next to the running dist/server/index.mjs
 	compress: false,
