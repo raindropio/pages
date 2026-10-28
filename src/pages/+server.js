@@ -6,7 +6,6 @@ import { staticMiddleware } from 'srvx/static'
 import oembed from '../server/api/oembed/index.js'
 import feed from '../server/feed/index.js'
 import timeout from '../server/middleware/timeout.js'
-import plausible from '../server/middleware/plausible.js'
 
 const app = new Hono()
 
@@ -20,18 +19,37 @@ vike(app)
 
 app.get('/health', c => c.text('ok', 200, { 'Cache-Control': 'no-store' }))
 
+const tooManyRequests = c => c.text('Too Many Requests', 429, { 'Cache-Control': 'no-store' })
+
 app.use(rateLimiter({
 	windowMs: 60_000,
 	limit: 60,
 	keyGenerator: c => c.req.header('x-forwarded-for')?.split(',')[0].trim() || 'unknown',
-	handler: c => c.text('Too Many Requests', 429, { 'Cache-Control': 'no-store' })
+	handler: tooManyRequests
 }))
 
-app.use(plausible)
 app.use(timeout(5_000))
 
-app.get('/api/oembed', oembed)
-app.get('/:slug_id{.+-\\d+}/feed', feed)
+app.get(
+	'/api/oembed',
+	rateLimiter({
+		windowMs: 3_600_000,
+		limit: 1,
+		keyGenerator: c => c.req.query('url') || '',
+		handler: tooManyRequests
+	}),
+	oembed
+)
+app.get(
+	'/:slug_id{.+-\\d+}/feed',
+	rateLimiter({
+		windowMs: 3_600_000,
+		limit: 1,
+		keyGenerator: c => c.req.header('host') + c.req.path,
+		handler: tooManyRequests
+	}),
+	feed
+)
 
 const serveStatic = staticMiddleware({
 	dir: path.resolve(process.argv[1], '../../client'), //dist/client, next to the running dist/server/index.mjs
