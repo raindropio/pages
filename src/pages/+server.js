@@ -40,6 +40,7 @@ app.get(
 	}),
 	oembed
 )
+
 app.get(
 	'/:slug_id{.+-\\d+}/feed',
 	rateLimiter({
@@ -50,6 +51,14 @@ app.get(
 	}),
 	feed
 )
+
+//rate limit per host (public profile)
+app.use(rateLimiter({
+	windowMs: 60_000,
+	limit: 30,
+	keyGenerator: c => c.req.header('host') || 'unknown',
+	handler: tooManyRequests
+}))
 
 const serveStatic = staticMiddleware({
 	dir: path.resolve(process.argv[1], '../../client'), //dist/client, next to the running dist/server/index.mjs
