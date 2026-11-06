@@ -7,6 +7,8 @@ import find from 'lodash-es/find'
 export async function data({ routeParams: { id, user_name, options }, runtime }) {
 	const { signal } = runtime.hono.req.raw //abort API calls when the client disconnects
 	options = parseQueryParams(options)
+	if ('search' in options)
+		options.search = String(options.search)
 	options.sort = options.sort || (options.search?.length ? 'score' : '-created')
 	options.perpage = RAINDROPS_PER_PAGE
 

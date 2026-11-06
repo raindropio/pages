@@ -24,6 +24,8 @@ export async function data({ routeParams: { id, user_name, options }, runtime })
 
 	const haveNested = collections.some(c => c.parent?.$id == collection._id)
 	options = parseQueryParams(options)
+	if ('search' in options)
+		options.search = String(options.search)
 	options.sort = options.sort || (haveNested ? '-created' : '-sort')
 	options.perpage = parseInt(options.perpage || RAINDROPS_PER_PAGE)
 

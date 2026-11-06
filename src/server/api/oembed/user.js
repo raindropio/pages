@@ -27,7 +27,7 @@ export function getHTML({ user }, options={}) {
     )
 
     return (`<iframe
-        style="border: 0; width: 100%; height: ${height || base.height}px;"
+        style="border: 0; width: 100%; height: ${parseInt(height) || base.height}px;"
         allowfullscreen
         frameborder="0"
         src="${url}"></iframe>`)
