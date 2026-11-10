@@ -45,14 +45,6 @@ app.get(
 	feed
 )
 
-//rate limit each subdomain
-app.use(rateLimiter({
-	windowMs: 60_000,
-	limit: 120,
-	keyGenerator: c => c.req.header('host') || 'unknown',
-	handler: c=>c.text('Too Many Requests', 429, { 'Cache-Control': 'no-store' })
-}))
-
 //not rate limited
 const serveStatic = staticMiddleware({
 	dir: path.resolve(process.argv[1], '../../client'), //dist/client, next to the running dist/server/index.mjs

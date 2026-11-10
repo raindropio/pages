@@ -11,6 +11,8 @@ export default function Pagination({ count, perpage, force=false, ...etc }) {
     const _pagesRef = useRef(null)
     const page = parseInt(etc.page)||0
     const pagesCount = Math.ceil(count/perpage)
+    const hasPrev = page > 0
+    const hasNext = page < pagesCount-1 || force == 'next'
 
     useEffect(()=>{
         const elem = document.getElementById(`page-${page}`)
@@ -56,15 +58,15 @@ export default function Pagination({ count, perpage, force=false, ...etc }) {
 
                 <nav className={s.navigation}>
                     <Button 
-                        href={getLink({page: page-1})}
-                        disabled={!page}
+                        href={hasPrev ? getLink({page: page-1}) : undefined}
+                        disabled={!hasPrev}
                         title='Previous page'>
                         <Icon name='arrow-left' />
                     </Button>
 
                     <Button 
-                        href={getLink({page: page+1})}
-                        disabled={page >= pagesCount-1 && force != 'next'}
+                        href={hasNext ? getLink({page: page+1}) : undefined}
+                        disabled={!hasNext}
                         title='Next page'>
                         <Icon name='arrow-right' />
                     </Button>
